@@ -17,6 +17,8 @@
       --paper:#ffffff;
       --wash:#f7f5f1; /* warm off-white */
       --navy:#0b1f3a; /* classic navy */
+      --brown:#8b5a2b; /* added for accents matching palette */
+      --blue:#90caf9; /* added for contrast accents */
       --rule:#e7e1d8; /* warm hairline */
       --card:#ffffff;
       --shadow: 0 10px 24px rgba(0,0,0,0.06);
@@ -60,11 +62,11 @@
     p{ margin: 0 0 14px 0; color: var(--ink); }
     .muted{ color: var(--muted); }
     a{
-      color: var(--navy);
+      color: var(--blue);
       text-decoration: none;
-      border-bottom: 1px solid rgba(11,31,58,0.25);
+      border-bottom: 1px solid rgba(144,202,249,0.25);
     }
-    a:hover{ border-bottom-color: rgba(11,31,58,0.65); }
+    a:hover{ border-bottom-color: rgba(144,202,249,0.65); }
     /* Layout */
     .wrap{ max-width: 1120px; margin: 0 auto; padding: 0 22px; }
     .rule{ height:1px; background: var(--rule); margin: 18px 0 0 0; }
@@ -132,8 +134,8 @@
       gap: 8px;
       padding: 10px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(11,31,58,0.18);
-      background: rgba(11,31,58,0.04);
+      border: 1px solid rgba(144,202,249,0.18); /* blue contrast */
+      background: rgba(144,202,249,0.04);
       color: var(--navy);
       font-size: 0.92rem;
       letter-spacing: 0.5px;
@@ -141,11 +143,11 @@
       user-select:none;
       text-decoration:none;
     }
-    .btn:hover{ background: rgba(11,31,58,0.07); }
+    .btn:hover{ background: rgba(144,202,249,0.07); }
     .btn.primary{
-      background: var(--navy);
+      background: var(--brown);
       color: #fff;
-      border-color: var(--navy);
+      border-color: var(--brown);
     }
     .btn.primary:hover{ filter: brightness(1.04); }
     .btn:focus{ outline: 3px solid var(--focus); outline-offset: 2px; }
@@ -175,9 +177,9 @@
     }
     .pill{
       font-size: 0.88rem;
-      color: var(--navy);
-      background: rgba(11,31,58,0.06);
-      border: 1px solid rgba(11,31,58,0.10);
+      color: var(--brown);
+      background: rgba(139,90,43,0.06);
+      border: 1px solid rgba(139,90,43,0.10);
       padding: 6px 10px;
       border-radius: 999px;
       letter-spacing: 0.2px;
@@ -287,9 +289,9 @@
     }
     .badge{
       font-size: 0.82rem;
-      color: var(--navy);
-      background: rgba(11,31,58,0.06);
-      border: 1px solid rgba(11,31,58,0.12);
+      color: var(--brown);
+      background: rgba(139,90,43,0.06);
+      border: 1px solid rgba(139,90,43,0.12);
       padding: 4px 8px;
       border-radius: 999px;
       letter-spacing: 0.6px;
@@ -381,7 +383,11 @@
       <a href="#skills" data-nav="reveal">Skills</a>
       <a href="#contact" data-nav="reveal">Contact</a>
       <span class="navSep" aria-hidden="true"></span>
+      <a href="https://www.linkedin.com/in/sichen-liang-32933b2b9/" target="_blank" rel="noopener">LinkedIn</a>
+      <span class="navSep" aria-hidden="true"></span>
       <a href="https://github.com/SichenLiang" target="_blank" rel="noopener">GitHub</a>
+      <span class="navSep" aria-hidden="true"></span>
+      <a href="https://makerworld.com/en/@sichen_liang233" target="_blank" rel="noopener">MakerWorld</a>
     </nav>
   </div>
 </header>
@@ -412,12 +418,6 @@
         <button class="btn" data-action="reveal" data-target="#contact">Contact</button>
       </div>
       <div class="rule"></div>
-      <p class="muted" style="margin-top:14px;">
-        Links:
-        <a href="https://www.linkedin.com/in/sichen-liang-32933b2b9/" target="_blank" rel="noopener">LinkedIn</a> ·
-        <a href="https://github.com/SichenLiang" target="_blank" rel="noopener">GitHub</a> ·
-        <a href="https://makerworld.com/en/@sichen_liang233" target="_blank" rel="noopener">MakerWorld</a>
-      </p>
     </div>
     <div class="portrait">
       <img loading="lazy" src="assets/portrait.jpg" alt="Portrait of Sichen Liang"
@@ -550,9 +550,9 @@
             <span class="muted">Product Management · Guangzhou, China</span>
           </div>
           <ul>
-            <li>Conducted market research on EV adoption trends; produced analytical reports and visualizations.</li>
-            <li>Supported competitive benchmarking and early-stage product strategy discussions.</li>
-            <li>Built a custom web crawler + Excel automation workflow for sales tracking reports.</li>
+            <li>Conducted comprehensive market research on EV adoption trends in Japan, Indonesia, and Brazil; produced analytical reports with bubble-maps visualizations and predictive demand models</li>
+            <li>Collaborated with cross-functional engineering and product teams to perform competitive benchmarking and support early-stage product strategy discussions</li>
+            <li>Built a custom web-crawler and Excel automation workflow to streamline Hong Kong sales-tracking reports, significantly improving data aggregation efficiency and reducing manual processing time</li>
           </ul>
           <div class="imgSlot">
             <img loading="lazy" src="assets/exp_xpeng.jpg" alt="XPeng internship"
@@ -569,10 +569,10 @@
             <span class="muted">NYU · Supervisor: Dr. Hao Su</span>
           </div>
           <ul>
-            <li>Designed a custom PCB for distributed motor-control modules with sensing + embedded safety protections.</li>
-            <li>Programmed coordination firmware to synchronize multi-joint motor behavior and improve closed-loop response.</li>
-            <li>Modeled motor housings and structural components in Creo; optimized for manufacturability and assembly.</li>
-            <li>Evaluated human–exoskeleton interaction using motion tracking and balance assessment workflows.</li>
+            <li>Designed a custom PCB for distributed motor-control modules, integrating drivers, sensing units, and embedded safety protections for real-time actuation</li>
+            <li>Programmed coordination firmware to synchronize multi-joint motor behavior, improving closed-loop response stability and control accuracy</li>
+            <li>Modeled motor housings and structural components for robot-assisted neurointervention/thrombectomy systems using Creo; optimized designs for manufacturability and assembly</li>
+            <li>Evaluated human–exoskeleton interaction using motion-tracking and balance-assessment workflows, focusing on gait symmetry, user intent detection, and control robustness</li>
           </ul>
           <div class="imgSlot">
             <img loading="lazy" src="assets/exp_biorolab.jpg" alt="Biorobotics lab work"
@@ -598,9 +598,9 @@
             onerror="this.remove(); this.parentElement.textContent='Image placeholder: assets/proj_revit.jpg';">
         </div>
         <ul>
-          <li>Directed conceptual redesign of building layout and systems-integration planning.</li>
-          <li>Built full-scale models in Revit, including MEP systems routing.</li>
-          <li>Fabricated a scaled physical prototype to validate configuration and functionality.</li>
+          <li>Directed conceptual redesign of the NYU Metro 6 building layout, coordinating architectural sketches and system-integration planning</li>
+          <li>Built full-scale digital models in Revit, including electrical mechanical and plumbing systems routing</li>
+          <li>Fabricated a scaled physical prototype to validate structural configuration and spatial functionality</li>
         </ul>
       </div>
       <div class="card">
@@ -611,10 +611,11 @@
             onerror="this.remove(); this.parentElement.textContent='Image placeholder: assets/proj_prototyping.jpg';">
         </div>
         <ul>
-          <li>Designed and 3D-printed precision longboard components with iterative fit/feedback cycles.</li>
-          <li>Implemented 3D toe wedge solutions; focused on geometry and reliability.</li>
-          <li>Explored structure optimization topics (including an FEA-based bike frame study).</li>
-          <li>Selected implementations: non-inverting op-amp testing; mechanism design (Team 5451, 2022).</li>
+          <li>Designed and 3D-printed longboard components with iterative fit/feedback cycles</li>
+          <li>CNC-prototyped a carbon-fiber deck</li>
+          <li>Implemented 3D toe wedge solutions; focused on geometry and reliability</li>
+          <li>Explored structure optimization topics (including an FEA-based bike frame study)</li>
+          <li>Selected implementations: non-inverting op-amp testing; mechanism design (Team 5451, 2022)</li>
         </ul>
       </div>
     </div>
@@ -631,9 +632,9 @@
             <span class="badge">Vice President</span>
           </div>
           <ul>
-            <li>Organized and hosted University-wide Club Festivals; recruited 100+ participants.</li>
-            <li>Led weekly structured training sessions focused on sprint mechanics and bike handling.</li>
-            <li>Managed logistics, budgeting, and safety protocols for regional events.</li>
+            <li>Organized and hosted two University-wide Club Festivals, overseeing event promotion, and recruitment of 100+ participants</li>
+            <li>Led weekly structured training sessions focused on sprint mechanics, interval conditioning, and bike-handling control</li>
+            <li>Managed logistics, budgeting, and safety protocols for regional racing events, including long-distance travel and planning</li>
           </ul>
           <div class="imgSlot">
             <img loading="lazy" src="assets/leadership_cycling.jpg" alt="NYU Cycling Club activities"
@@ -648,9 +649,8 @@
             <h3 style="margin:0;">Selected Awards</h3>
           </div>
           <ul>
-            <li>Dean’s List — NYU Tandon (multiple semesters)</li>
-            <li>Recognition for outstanding contribution to FRC Team 5451 (robotics competition)</li>
-            <li>[Add more real awards here as applicable]</li>
+            <li>Champion, 2023 Beijing Longboard Marathon (U18 Division)</li>
+            <li>7th Place, 2025 Reddish Knob Downhill Race (Open Class)</li>
           </ul>
         </div>
       </div>
@@ -664,31 +664,33 @@
     </p>
     <div class="grid3">
       <div class="card">
-        <h3>Programming & Embedded</h3>
+        <h3>Programming & Tools</h3>
         <ul>
-          <li>C / C++ (embedded firmware)</li>
-          <li>Python (automation, data analysis)</li>
-          <li>RTOS concepts & real-time scheduling</li>
-          <li>MATLAB / Simulink (control modeling)</li>
+          <li>Python</li>
+          <li>Excel</li>
+          <li>Verilog</li>
+          <li>Creo</li>
+          <li>SolidWorks</li>
+          <li>ANSYS</li>
+          <li>Revit</li>
+          <li>Bambu Lab</li>
         </ul>
       </div>
       <div class="card">
-        <h3>Hardware & Tools</h3>
+        <h3>Domains</h3>
         <ul>
-          <li>PCB design (KiCad / Altium)</li>
-          <li>Motor drivers & power electronics</li>
-          <li>Sensors: IMUs, encoders, current/voltage</li>
-          <li>CAD: Creo, SolidWorks, Revit</li>
-          <li>Fabrication: 3D printing, CNC, soldering</li>
+          <li>Embedded systems</li>
+          <li>Motor control</li>
+          <li>PCB design</li>
+          <li>Mechanical design</li>
+          <li>Rapid prototyping</li>
         </ul>
       </div>
       <div class="card">
-        <h3>Engineering & Soft</h3>
+        <h3>Languages</h3>
         <ul>
-          <li>Control theory: PID, state-space, stability</li>
-          <li>Mechatronic system integration</li>
-          <li>Technical documentation & presentation</li>
-          <li>Team leadership & project management</li>
+          <li>English (Fluent)</li>
+          <li>Mandarin (Native)</li>
         </ul>
       </div>
     </div>
@@ -701,12 +703,14 @@
       or just to connect.
     </p>
     <div class="card" style="margin-top:14px; max-width:680px;">
-      <p><strong>Email:</strong> [your.email@nyu.edu] (replace with real address)</p>
+      <p><strong>Email:</strong> sl10445@nyu.edu</p>
+      <p><strong>Phone:</strong> (718)431-4806</p>
       <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/sichen-liang-32933b2b9/" target="_blank">linkedin.com/in/sichen-liang-32933b2b9</a></p>
       <p><strong>GitHub:</strong> <a href="https://github.com/SichenLiang" target="_blank">github.com/SichenLiang</a></p>
-      <p><strong>Location:</strong> New York City / Brooklyn</p>
+      <p><strong>MakerWorld:</strong> <a href="https://makerworld.com/en/@sichen_liang233" target="_blank">makerworld.com/en/@sichen_liang233</a></p>
+      <p><strong>Location:</strong> New York, USA</p>
       <div class="btnRow" style="margin-top:24px;">
-        <a href="mailto:your.email@nyu.edu" class="btn primary">Send Email</a>
+        <a href="mailto:sl10445@nyu.edu" class="btn primary">Send Email</a>
       </div>
     </div>
   </section>
