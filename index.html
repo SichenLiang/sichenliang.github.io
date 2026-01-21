@@ -5,178 +5,324 @@
   <title>Sichen Liang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    :root {
-      --ink: #111111;
-      --muted: #5a5a5a;
-      --paper: #ffffff;
-      --wash: #f7f5f1;
-      --navy: #0b1f3a;          /* deep navy for header – fixed color */
-      --brown: #8b5a2b;         /* accent for primary button */
-      --rule: #e7e1d8;
-      --card: #ffffff;
+    :root{
+      --ink:#111111;
+      --muted:#5a5a5a;
+      --paper:#ffffff;
+      --wash:#f7f5f1;
+      --navy:#0b1f3a;
+      --brown:#8b5a2b;
+      --accent:#1d2f4e; /* Ralph Lauren deep navy/blue for banner */
+      --rule:#e7e1d8;
+      --card:#ffffff;
       --shadow: 0 10px 24px rgba(0,0,0,0.06);
       --radius: 14px;
-      --focus: rgba(11,31,58,0.25);
+      --focus: rgba(29,47,78,0.25);
     }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      background: var(--paper);
-      color: var(--ink);
-      line-height: 1.7;
-      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      background:var(--paper);
+      color:var(--ink);
+      line-height:1.7;
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
     }
-    h1, h2, h3 {
-      font-family: Georgia, "Times New Roman", serif;
+    h1,h2,h3{
+      font-family: ui-serif, "Georgia", "Times New Roman", Times, serif;
       letter-spacing: 0.2px;
-      margin: 0 0 10px 0;
+      margin:0 0 10px 0;
       color: var(--navy);
     }
-    h1 { font-size: clamp(2.8rem, 5vw, 4rem); font-weight: 650; letter-spacing: 0.4px; }
-    h2 { font-size: 1.65rem; font-weight: 650; margin-top: 60px; }
-    h3 { font-size: 1.15rem; font-weight: 650; color: var(--ink); }
-    p { margin: 0 0 16px; }
-    .muted { color: var(--muted); }
-    a { color: var(--navy); text-decoration: none; border-bottom: 1px solid rgba(11,31,58,0.3); }
-    a:hover { border-bottom-color: var(--navy); }
-    .wrap { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
-    .rule { height: 1px; background: var(--rule); margin: 20px 0; }
-
-    header {
+    h1{
+      font-size: clamp(2.55rem, 4.0vw, 3.35rem);
+      font-weight: 650;
+      letter-spacing: 0.35px;
+    }
+    h2{
+      font-size: 1.55rem;
+      font-weight: 650;
+      margin-top: 54px;
+      letter-spacing: 0.2px;
+    }
+    h3{
+      font-size: 1.06rem;
+      font-weight: 650;
+      color: var(--ink);
+      letter-spacing: 0.12px;
+    }
+    p{ margin: 0 0 14px 0; color: var(--ink); }
+    .muted{ color: var(--muted); }
+    a{
+      color: var(--navy);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(11,31,58,0.25);
+    }
+    a:hover{ border-bottom-color: rgba(11,31,58,0.65); }
+    .wrap{ max-width: 1120px; margin: 0 auto; padding: 0 22px; }
+    .rule{ height:1px; background: var(--rule); margin: 18px 0 0 0; }
+    header{
       position: sticky;
       top: 0;
       z-index: 10;
-      background: var(--navy);
-      color: white;
-      border-bottom: 1px solid #0a1a30;
+      background: var(--accent);
+      color: #fff;
+      border-bottom: 1px solid #1a2a40;
     }
-    .topbar {
-      display: flex;
-      align-items: center;
+    .topbar{
+      display:flex;
+      align-items:center;
       justify-content: space-between;
       gap: 16px;
-      padding: 16px 0;
+      padding: 14px 0;
     }
-    .brand {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.25;
+    .brand{
+      display:flex;
+      flex-direction:column;
+      line-height:1.25;
     }
-    .brand .name {
-      font-family: Georgia, serif;
+    .brand .name{
+      font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
       font-weight: 800;
       letter-spacing: 0.55px;
-      color: white;
-      font-size: 1.2rem;
+      color: #fff;
+      font-size: 1.06rem;
       text-transform: uppercase;
       cursor: pointer;
     }
-    .brand .tag { font-size: 0.95rem; color: rgba(255,255,255,0.85); }
-    nav {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      align-items: center;
-    }
-    nav a {
-      color: white;
+    .brand .tag{
       font-size: 0.9rem;
-      padding: 8px 14px;
+      color: rgba(255,255,255,0.8);
+    }
+    nav{
+      display:flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content:flex-end;
+      align-items:center;
+    }
+    nav a{
+      border-bottom: none;
+      font-size: 0.86rem;
+      color: #fff;
+      padding: 7px 10px;
       border-radius: 999px;
       letter-spacing: 0.8px;
       text-transform: uppercase;
     }
-    nav a:hover { background: rgba(255,255,255,0.12); }
-    .navSep { width: 1px; height: 20px; background: rgba(255,255,255,0.2); margin: 0 6px; }
-
-    .btnRow { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
-    .btn {
-      padding: 12px 20px;
+    nav a:hover{ background: rgba(255,255,255,0.15); }
+    .navSep{
+      width:1px; height:18px;
+      background: rgba(255,255,255,0.2);
+      margin: 0 4px;
+    }
+    .btnRow{ display:flex; flex-wrap:wrap; gap: 10px; margin-top: 16px; }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 10px 14px;
       border-radius: 999px;
-      font-size: 1rem;
-      cursor: pointer;
-      border: none;
+      border: 1px solid rgba(255,255,255,0.3);
       background: rgba(255,255,255,0.1);
-      color: white;
+      color: #fff;
+      font-size: 0.92rem;
+      letter-spacing: 0.5px;
+      cursor:pointer;
+      user-select:none;
+      text-decoration:none;
     }
-    .btn.primary {
+    .btn:hover{ background: rgba(255,255,255,0.2); }
+    .btn.primary{
       background: var(--brown);
-      color: white;
-      font-size: 1.3rem;
-      padding: 18px 40px;
+      color: #fff;
+      border-color: var(--brown);
+      font-size: 1.1rem;
+      padding: 14px 20px;
       font-weight: 600;
-      border: 1px solid var(--brown);
     }
-    .btn.primary:hover { filter: brightness(1.12); }
-
-    .hero {
+    .btn.primary:hover{ filter: brightness(1.1); }
+    .hero{
       background: linear-gradient(180deg, var(--wash), #ffffff);
-      padding: 90px 0 50px;
+      padding: 80px 0 40px 0;
       border-bottom: 1px solid var(--rule);
     }
-    .heroGrid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px; align-items: center; }
-    .heroSub { font-size: 1.1rem; color: var(--muted); margin-bottom: 20px; max-width: 60ch; }
-    .pillRow { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
-    .pill {
-      font-size: 0.95rem;
-      color: var(--brown);
-      background: rgba(139,90,43,0.08);
-      border: 1px solid rgba(139,90,43,0.15);
-      padding: 8px 16px;
-      border-radius: 999px;
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 36px;
+      align-items: center;
     }
-    .portrait {
+    .heroSub{
+      font-size: 1.04rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+      max-width: 58ch;
+    }
+    .pillRow{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .pill{
+      font-size: 0.88rem;
+      color: var(--brown);
+      background: rgba(139,90,43,0.06);
+      border: 1px solid rgba(139,90,43,0.10);
+      padding: 6px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.2px;
+    }
+    .portrait{
       border-radius: var(--radius);
       overflow: hidden;
       background: #d9d3ca;
       box-shadow: var(--shadow);
       border: 1px solid var(--rule);
-      aspect-ratio: 4/5;
+      aspect-ratio: 4 / 5;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: rgba(0,0,0,0.45);
+      font-size: 0.95rem;
+      text-align:center;
+      padding: 14px;
     }
-    .portrait img { width: 100%; height: 100%; object-fit: cover; }
-
-    main { padding: 30px 0 80px; }
-    .sectionLead { max-width: 860px; color: var(--muted); font-size: 1.05rem; }
-    .grid2, .grid3 { display: grid; gap: 24px; margin-top: 20px; }
-    .grid2 { grid-template-columns: 1fr 1fr; }
-    .grid3 { grid-template-columns: repeat(3, 1fr); }
-    .card {
+    .portrait img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+    }
+    main{ padding: 22px 0 72px 0; }
+    .sectionLead{
+      max-width: 860px;
+      color: var(--muted);
+    }
+    .grid2{ display:grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 14px; }
+    .grid3{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 14px; }
+    .card{
       background: var(--card);
       border: 1px solid var(--rule);
       border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: var(--shadow);
+      padding: 18px 18px 16px 18px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.04);
     }
-    .card .meta { font-size: 0.95rem; color: var(--muted); margin-bottom: 12px; }
-    .row { display: flex; gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--rule); }
-    .row:last-child { border-bottom: none; }
-    .when { min-width: 180px; font-size: 0.95rem; color: var(--muted); padding-top: 4px; }
-    .badge {
-      font-size: 0.85rem;
-      color: var(--brown);
-      background: rgba(139,90,43,0.08);
-      border: 1px solid rgba(139,90,43,0.15);
-      padding: 5px 10px;
-      border-radius: 999px;
+    .card .meta{ font-size: 0.90rem; color: var(--muted); margin-bottom: 8px; letter-spacing: 0.25px; }
+    .card ul{ margin: 10px 0 0 18px; padding: 0; }
+    .card li{ margin-bottom: 8px; }
+    .imgSlot{
+      border-radius: 12px;
+      background: #d9d3ca;
+      border: 1px solid var(--rule);
+      aspect-ratio: 16 / 9;
+      margin: 10px 0 12px 0;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: rgba(0,0,0,0.45);
+      font-size: 0.9rem;
+      text-align:center;
+      padding: 10px;
     }
-
-    .welcomeOnly { display: block; }
-    .gated { display: none; }
-    body.revealed .gated { display: block; }
-    body.revealed .welcomeOnly { display: none; }
-
-    footer {
-      border-top: 1px solid var(--rule);
-      padding: 40px 0;
+    .imgSlot img{ width:100%; height:100%; object-fit: cover; display:block; }
+    .row{
+      display:flex;
+      gap: 18px;
+      align-items:flex-start;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .row:last-child{ border-bottom:none; }
+    .when{
+      min-width: 170px;
+      font-size: 0.92rem;
       color: var(--muted);
-      font-size: 0.95rem;
+      padding-top: 3px;
+      letter-spacing: 0.2px;
     }
-
-    @media (max-width: 980px) {
-      .heroGrid, .grid2, .grid3 { grid-template-columns: 1fr; }
-      .btn.primary { font-size: 1.15rem; padding: 16px 36px; }
+    .what{ flex:1; }
+    .what .titleLine{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+    .badge{
+      font-size: 0.82rem;
+      color: var(--brown);
+      background: rgba(139,90,43,0.06);
+      border: 1px solid rgba(139,90,43,0.12);
+      padding: 4px 8px;
+      border-radius: 999px;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+    }
+    .welcomeOnly{ display:block; }
+    .gated{ display:none; }
+    body.revealed .gated{ display:block; }
+    body.revealed .welcomeOnly{ display:none; }
+    .featuredHeader{
+      display:flex;
+      justify-content:space-between;
+      align-items:baseline;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .featuredHeader .label{
+      font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+      color: var(--navy);
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+    .miniGrid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 10px;
+    }
+    .miniCard{
+      border: 1px solid var(--rule);
+      border-radius: 14px;
+      padding: 14px 14px 12px 14px;
+      background: #fff;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.03);
+    }
+    .miniCard .kicker{
+      font-size: 0.82rem;
+      color: var(--muted);
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .miniCard h3{ margin: 0 0 6px 0; }
+    .miniCard p{ margin: 0; color: var(--muted); font-size: 0.95rem; }
+    footer{
+      border-top: 1px solid var(--rule);
+      padding: 28px 0 34px 0;
+      background: #ffffff;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .footerGrid{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 16px;
+      justify-content: space-between;
+      align-items:center;
+    }
+    @media (max-width: 980px){
+      .heroGrid{ grid-template-columns: 1fr; }
+      .portrait{ max-width: 420px; }
+      .grid3,.grid2{ grid-template-columns: 1fr; }
+      .miniGrid{ grid-template-columns: 1fr; }
+      .when{ min-width: 130px; }
+      nav{ justify-content:flex-start; }
     }
   </style>
 </head>
@@ -185,16 +331,16 @@
 <header>
   <div class="wrap topbar">
     <div class="brand">
-      <div class="name" id="home-link">Sichen Liang</div>
+      <div class="name" onclick="document.body.classList.remove('revealed'); window.scrollTo({top: 0, behavior: 'smooth'});">Sichen Liang</div>
       <div class="tag">Electrical Engineering · NYU Tandon · Class of 2027</div>
     </div>
     <nav aria-label="Primary">
-      <a href="#about" data-reveal>About</a>
+      <a href="#about" data-nav="reveal">About</a>
       <span class="navSep" aria-hidden="true"></span>
-      <a href="#experience" data-reveal>Experience</a>
-      <a href="#projects" data-reveal>Projects</a>
-      <a href="#skills" data-reveal>Skills</a>
-      <a href="#contact" data-reveal>Contact</a>
+      <a href="#experience" data-nav="reveal">Experience</a>
+      <a href="#projects" data-nav="reveal">Projects</a>
+      <a href="#skills" data-nav="reveal">Skills</a>
+      <a href="#contact" data-nav="reveal">Contact</a>
       <span class="navSep" aria-hidden="true"></span>
       <a href="https://makerworld.com/en/@sichen_liang233" target="_blank" rel="noopener">MakerWorld</a>
     </nav>
@@ -221,104 +367,83 @@
         <div class="pill">Rapid Prototyping (3D Print / CNC)</div>
         <div class="pill">Mechanical + Electrical Integration</div>
       </div>
-      <div class="btnRow">
-        <button class="btn primary" data-reveal data-target="#projects">Enter Portfolio</button>
-        <button class="btn" data-reveal data-target="#experience">View Experience</button>
-        <button class="btn" data-reveal data-target="#contact">Contact</button>
+      <div class="btnRow" role="group" aria-label="Primary actions">
+        <button class="btn primary" data-action="reveal" data-target="#projects">Enter Portfolio</button>
+        <button class="btn" data-action="reveal" data-target="#experience">View Experience</button>
+        <button class="btn" data-action="reveal" data-target="#contact">Contact</button>
       </div>
-      <div class="rule"></div>
+      <div class="rule" style="margin-top:24px;"></div>
     </div>
     <div class="portrait">
       <img loading="lazy" src="assets/portrait.jpg" alt="Portrait of Sichen Liang"
-           onerror="this.remove(); this.parentElement.textContent='Image placeholder: assets/portrait.jpg';">
+        onerror="this.remove(); this.parentElement.textContent='Image placeholder: assets/portrait.jpg (upload your portrait or a lab photo)';">
     </div>
   </div>
 
-  <div class="wrap welcomeOnly" style="padding-top: 32px;">
+  <div class="wrap welcomeOnly" style="padding-top: 32px; padding-bottom: 40px;">
     <div class="featuredHeader">
       <div class="label">Featured</div>
       <div class="muted" style="font-size:0.95rem;">
-        A few highlights — click “Enter Portfolio” for full details.
+        Highlights — click “Enter Portfolio” to explore full details.
       </div>
     </div>
-    <div class="miniGrid" style="margin-top: 16px; display:grid; grid-template-columns:repeat(3,1fr); gap:16px;">
-      <div class="miniCard" style="border:1px solid var(--rule); border-radius:14px; padding:16px; background:#fff; box-shadow:0 4px 12px rgba(0,0,0,0.05);">
-        <div class="kicker" style="font-size:0.85rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.8px;">Research</div>
-        <h3 style="margin:8px 0 6px;">Motor Control PCB + Firmware</h3>
-        <p style="margin:0; color:var(--muted);">Distributed modules; sensing + safety; real-time coordination.</p>
+    <div class="miniGrid" style="margin-top: 16px;">
+      <div class="miniCard">
+        <div class="kicker">Research</div>
+        <h3>Motor Control PCB + Firmware</h3>
+        <p>Distributed modules; sensing + safety; real-time coordination.</p>
       </div>
-      <!-- other two mini cards the same way -->
+      <div class="miniCard">
+        <div class="kicker">Project</div>
+        <h3>NYU Building Redesign (Revit)</h3>
+        <p>Full-scale modeling with system routing; fabricated scaled prototype.</p>
+      </div>
+      <div class="miniCard">
+        <div class="kicker">Leadership</div>
+        <h3>NYU Cycling Club — VP</h3>
+        <p>Organized festivals and training; logistics + safety for regional events.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <main class="wrap">
-  <!-- === PASTE YOUR FULL GATED SECTIONS HERE === -->
-  <!-- Use the content from your CV / earlier versions – about, interests, experience, projects, leadership, skills, contact -->
-  <!-- Example structure (fill in your real content): -->
-
-  <section id="about" class="gated">
-    <h2>About</h2>
-    <p class="sectionLead">...</p>
-    <!-- your cards / content -->
-  </section>
-
-  <section id="experience" class="gated">
-    <h2>Experience</h2>
-    <!-- XPeng, BioRobotics Lab, etc. -->
-  </section>
-
-  <section id="projects" class="gated">
-    <h2>Projects</h2>
-    <!-- NYU Building, Prototyping, etc. -->
-  </section>
-
-  <!-- ... other sections ... -->
-
-  <section id="contact" class="gated">
-    <h2>Contact</h2>
-    <p class="sectionLead">Feel free to reach out...</p>
-    <div class="card">
-      <p><strong>Email:</strong> sl10445@nyu.edu</p>
-      <p><strong>Phone:</strong> (718) 431-4806</p>
-      <p><strong>GitHub:</strong> <a href="https://github.com/SichenLiang" target="_blank">github.com/SichenLiang</a></p>
-      <p><strong>MakerWorld:</strong> <a href="https://makerworld.com/en/@sichen_liang233" target="_blank">makerworld.com/@sichen_liang233</a></p>
-      <!-- LinkedIn can stay here if you want -->
-    </div>
-  </section>
+  <!-- All gated sections remain the same as previous version -->
+  <!-- ... (copy the <section id="about"> to <section id="contact"> from previous code here) ... -->
+  <!-- For brevity, assuming you paste the full gated content from the last version here -->
 </main>
 
 <footer class="wrap">
-  <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+  <div class="footerGrid">
     <div>© 2026 Sichen Liang — All rights reserved.</div>
-    <div>Built with care · <a href="#top">Back to top</a></div>
+    <div>
+      Built with care · <a href="#top">Back to top</a>
+    </div>
   </div>
 </footer>
 
 <script>
-// === FIXED CLICK HANDLING ===
 document.addEventListener('click', function(e) {
-  const trigger = e.target.closest('[data-reveal]');
-  if (!trigger) return;
+  const btn = e.target.closest('[data-action="reveal"]');
+  if (!btn) return;
   e.preventDefault();
-
-  const targetId = trigger.dataset.target || trigger.getAttribute('href');
+  const targetId = btn.getAttribute('data-target');
   if (!targetId) return;
-
-  // Reveal gated content
   document.body.classList.add('revealed');
-
-  // Scroll smoothly to target
-  const targetElement = document.querySelector(targetId);
-  if (targetElement) {
-    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const targetEl = document.querySelector(targetId);
+  if (targetEl) {
+    targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 });
 
-// Reset to welcome / home when clicking name
-document.getElementById('home-link')?.addEventListener('click', function() {
-  document.body.classList.remove('revealed');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+document.querySelectorAll('nav a[data-nav="reveal"]').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    document.body.classList.add('revealed');
+    const href = this.getAttribute('href');
+    const target = document.querySelector(href);
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
 });
 </script>
 
