@@ -404,7 +404,7 @@
   <!-- === HEADER / TOP NAVIGATION BAR === -->
   <header>
     <div class="wrap topbar">
-      <div class="brand">
+      <div class="brand" id="brandClick">
         <div class="name">Sichen Liang</div>
         <div class="tag">Electrical Engineering · NYU Tandon · Class of 2027</div>
       </div>
@@ -425,8 +425,6 @@
   <a id="top"></a>
 
   <!-- === HIDDEN BONUS GAME (Retro Radar Pong) - Hidden by default, toggles on banner click === -->
-  <!-- NOTE: This is placed right after header so it appears below the banner when shown. -->
-  <!-- To add/change the game: Edit the content inside this div if needed. -->
   <div id="retro-radar-pong" style="display:none; max-width:780px;margin:24px auto;">
     <style>
       #retro-radar-pong .wrap{
@@ -491,7 +489,6 @@
       #retro-radar-pong .stat:last-child{ border-bottom:none; }
       #retro-radar-pong .kbd{ color:#e8ffea; }
       #retro-radar-pong .small{ font-size:11px; color:#96d99e; opacity:.9; line-height:1.35; margin-top:8px;}
-      #retro-radar-pong .warning{ font-size:11px; color:#96d99e; opacity:.85; margin-top:10px;}
       @media (max-width: 720px){
         #retro-radar-pong .side{ flex:1 1 auto; min-width:unset; }
       }
@@ -499,7 +496,7 @@
     <div class="wrap">
       <div class="top">
         <div class="title">
-          <b>RETRO RADAR PONG</b>
+          <b>RETRO PONG</b>
           <span class="hint">W/S = left paddle · Space = start/pause · R = reset</span>
         </div>
         <div class="btns">
@@ -509,335 +506,19 @@
       </div>
       <div class="row">
         <div style="flex:1 1 420px; min-width:280px;">
-          <canvas id="rrpCanvas" width="900" height="520" aria-label="Retro Radar Pong"></canvas>
+          <canvas id="rrpCanvas" width="900" height="520" aria-label="Retro Pong"></canvas>
         </div>
         <div class="side">
-          <div class="stat"><span>Score</span><span id="rrpScore">0 : 0</span></div>
+          <div class="stat"><span>Score</span><span id="rrpScore">0</span></div>
           <div class="stat"><span>Speed</span><span id="rrpSpeed">1.00×</span></div>
-          <div class="stat"><span>Mode</span><span id="rrpModeLabel">1P (CPU right)</span></div>
+          <div class="stat"><span>Mode</span><span id="rrpModeLabel">Practice Mode</span></div>
           <div class="small">
             <div><span class="kbd">Touch/Mouse:</span> drag your paddle (left side).</div>
-            <div style="margin-top:6px;"><span class="kbd">Tip:</span> This is intentionally “early-game simple”: one ball, two paddles, bouncy physics, no powerups.</div>
+            <div style="margin-top:6px;"><span class="kbd">Goal:</span> Keep the ball in play! It bounces off the right wall.</div>
           </div>
         </div>
       </div>
     </div>
-    <script>
-      (() => {
-        const root = document.getElementById("retro-radar-pong");
-        const canvas = root.querySelector("#rrpCanvas");
-        const ctx = canvas.getContext("2d");
-        const startBtn = root.querySelector("#rrpStart");
-        const resetBtn = root.querySelector("#rrpReset");
-        const scoreEl = root.querySelector("#rrpScore");
-        const speedEl = root.querySelector("#rrpSpeed");
-        const modeEl = root.querySelector("#rrpModeLabel");
-        // ---- Look/feel (radar green) ----
-        const GLOW = "#b8ffc2";
-        const DIM = "rgba(184,255,194,0.22)";
-        const GRID = "rgba(184,255,194,0.10)";
-        // ---- Game state ----
-        let running = false;
-        let lastT = 0;
-        let onePlayer = true; // Always 1P, no mode switch
-        let scoreL = 0, scoreR = 0;
-        const W = () => canvas.width;
-        const H = () => canvas.height;
-        // paddles + ball in "canvas pixels"
-        const paddle = {
-          w: 14,
-          h: 96,
-          inset: 28,
-          speed: 640, // px/sec (keyboard)
-          yL: 0,
-          yR: 0,
-        };
-        const ball = {
-          r: 9,
-          x: 0,
-          y: 0,
-          vx: 520, // px/sec
-          vy: 220,
-          speedScale: 1.0,
-        };
-        // inputs
-        const keys = new Set();
-        let dragging = false;
-        let dragSide = "L"; // L or R
-        function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
-        function resetRound(servingTo = "R"){
-          paddle.yL = (H() - paddle.h) / 2;
-          paddle.yR = (H() - paddle.h) / 2;
-          ball.x = W() / 2;
-          ball.y = H() / 2;
-          const dir = (servingTo === "R") ? 1 : -1;
-          const angle = (Math.random() * 0.6 - 0.3); // -0.3..0.3 radians-ish effect
-          const base = 520;
-          ball.speedScale = 1.0;
-          ball.vx = dir * base;
-          ball.vy = base * 0.45 * (Math.random() < 0.5 ? -1 : 1) + base * 0.25 * angle;
-          updateHUD();
-        }
-        function resetAll(){
-          scoreL = 0; scoreR = 0;
-          resetRound("R");
-          running = false;
-          updateHUD();
-          draw(0);
-        }
-        function updateHUD(){
-          scoreEl.textContent = `${scoreL} : ${scoreR}`;
-          speedEl.textContent = `${ball.speedScale.toFixed(2)}×`;
-          modeEl.textContent = "1P (CPU right)";
-        }
-        function resizeForHiDPI(){
-          // keep the CSS-driven responsive width, but use devicePixelRatio for crispness
-          const dpr = Math.max(1, Math.floor(window.devicePixelRatio || 1));
-          const rect = canvas.getBoundingClientRect();
-          const targetW = Math.round(rect.width * dpr);
-          const targetH = Math.round((rect.width * 520/900) * dpr);
-          // avoid constantly reallocating if not needed
-          if (canvas.width !== targetW || canvas.height !== targetH){
-            canvas.width = targetW;
-            canvas.height = targetH;
-            resetRound("R");
-            draw(0);
-          }
-        }
-        function drawScanlines(){
-          ctx.save();
-          ctx.globalAlpha = 0.12;
-          ctx.fillStyle = "rgba(184,255,194,0.08)";
-          for (let y = 0; y < H(); y += 3){
-            ctx.fillRect(0, y, W(), 1);
-          }
-          ctx.restore();
-        }
-        function drawGrid(){
-          ctx.save();
-          ctx.strokeStyle = GRID;
-          ctx.lineWidth = 1;
-          // center line
-          ctx.setLineDash([8, 10]);
-          ctx.beginPath();
-          ctx.moveTo(W()/2, 14);
-          ctx.lineTo(W()/2, H()-14);
-          ctx.stroke();
-          // grid lines
-          ctx.setLineDash([2, 10]);
-          for (let i=1;i<6;i++){
-            const x = (W()/6)*i;
-            ctx.beginPath();
-            ctx.moveTo(x, 0);
-            ctx.lineTo(x, H());
-            ctx.stroke();
-          }
-          for (let i=1;i<4;i++){
-            const y = (H()/4)*i;
-            ctx.beginPath();
-            ctx.moveTo(0, y);
-            ctx.lineTo(W(), y);
-            ctx.stroke();
-          }
-          ctx.restore();
-        }
-        function glowStroke(fn, width=3){
-          ctx.save();
-          ctx.shadowColor = GLOW;
-          ctx.shadowBlur = 12;
-          ctx.strokeStyle = GLOW;
-          ctx.lineWidth = width;
-          fn();
-          ctx.restore();
-        }
-        function glowFill(fn){
-          ctx.save();
-          ctx.shadowColor = GLOW;
-          ctx.shadowBlur = 14;
-          ctx.fillStyle = GLOW;
-          fn();
-          ctx.restore();
-        }
-        function draw(t){
-          // background
-          ctx.clearRect(0,0,W(),H());
-          drawGrid();
-          // paddles
-          const xL = paddle.inset;
-          const xR = W() - paddle.inset - paddle.w;
-          glowFill(() => {
-            ctx.fillRect(xL, paddle.yL, paddle.w, paddle.h);
-            ctx.fillRect(xR, paddle.yR, paddle.w, paddle.h);
-          });
-          // ball
-          glowFill(() => {
-            ctx.beginPath();
-            ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI*2);
-            ctx.fill();
-          });
-          // subtle "trail"
-          ctx.save();
-          ctx.globalAlpha = 0.10;
-          ctx.fillStyle = GLOW;
-          ctx.beginPath();
-          ctx.arc(ball.x - ball.vx*0.02, ball.y - ball.vy*0.02, ball.r*0.85, 0, Math.PI*2);
-          ctx.fill();
-          ctx.restore();
-          // frame
-          glowStroke(() => {
-            ctx.beginPath();
-            ctx.roundRect(8, 8, W()-16, H()-16, 16);
-            ctx.stroke();
-          }, 2);
-          drawScanlines();
-          if (!running){
-            ctx.save();
-            ctx.fillStyle = "rgba(184,255,194,0.85)";
-            ctx.font = `bold ${Math.max(16, Math.floor(W()/40))}px ui-monospace, monospace`;
-            ctx.textAlign = "center";
-            ctx.fillText("Press SPACE or Start to play", W()/2, H()/2 - 10);
-            ctx.font = `${Math.max(12, Math.floor(W()/55))}px ui-monospace, monospace`;
-            ctx.fillStyle = "rgba(184,255,194,0.70)";
-            ctx.fillText("You: left paddle (W/S or drag)", W()/2, H()/2 + 20);
-            ctx.restore();
-          }
-        }
-        function collidePaddle(px, py, pw, ph){
-          // AABB vs circle
-          const cx = ball.x, cy = ball.y, r = ball.r;
-          const nearestX = clamp(cx, px, px+pw);
-          const nearestY = clamp(cy, py, py+ph);
-          const dx = cx - nearestX;
-          const dy = cy - nearestY;
-          return (dx*dx + dy*dy) <= r*r;
-        }
-        function bounceFromPaddle(isLeft){
-          // reflect X + add "english" based on hit position
-          const paddleY = isLeft ? paddle.yL : paddle.yR;
-          const center = paddleY + paddle.h/2;
-          const rel = (ball.y - center) / (paddle.h/2); // -1..1
-          const maxVy = 520;
-          ball.vx = Math.sign(ball.vx) * -1;
-          ball.vy = clamp(rel * maxVy, -maxVy, maxVy);
-          // speed up slightly each hit (classic)
-          ball.speedScale = clamp(ball.speedScale + 0.04, 1.0, 1.55);
-          ball.vx *= 1.01;
-          updateHUD();
-        }
-        function step(dt){
-          // keyboard paddle movement
-          const dy = paddle.speed * dt;
-          if (keys.has("w")) paddle.yL -= dy;
-          if (keys.has("s")) paddle.yL += dy;
-          // CPU right paddle
-          const target = ball.y - paddle.h/2;
-          const cpuSpeed = 520 * dt;
-          paddle.yR += clamp(target - paddle.yR, -cpuSpeed, cpuSpeed);
-          paddle.yL = clamp(paddle.yL, 14, H()-14-paddle.h);
-          paddle.yR = clamp(paddle.yR, 14, H()-14-paddle.h);
-          // move ball
-          ball.x += ball.vx * dt * ball.speedScale;
-          ball.y += ball.vy * dt * ball.speedScale;
-          // wall bounce
-          if (ball.y - ball.r < 14){
-            ball.y = 14 + ball.r;
-            ball.vy *= -1;
-          }
-          if (ball.y + ball.r > H()-14){
-            ball.y = H()-14 - ball.r;
-            ball.vy *= -1;
-          }
-          // paddle collisions
-          const xL = paddle.inset;
-          const xR = W() - paddle.inset - paddle.w;
-          if (ball.vx < 0 && collidePaddle(xL, paddle.yL, paddle.w, paddle.h)){
-            ball.x = xL + paddle.w + ball.r + 0.5;
-            bounceFromPaddle(true);
-          }
-          if (ball.vx > 0 && collidePaddle(xR, paddle.yR, paddle.w, paddle.h)){
-            ball.x = xR - ball.r - 0.5;
-            bounceFromPaddle(false);
-          }
-          // scoring
-          if (ball.x < -40){
-            scoreR += 1;
-            resetRound("L");
-          } else if (ball.x > W()+40){
-            scoreL += 1;
-            resetRound("R");
-          }
-          draw();
-        }
-        function loop(t){
-          if (!lastT) lastT = t;
-          const dt = Math.min(0.02, (t - lastT) / 1000);
-          lastT = t;
-          if (running) step(dt);
-          else draw(t);
-          requestAnimationFrame(loop);
-        }
-        // ---- Events ----
-        window.addEventListener("resize", resizeForHiDPI);
-        document.addEventListener("keydown", (e) => {
-          const k = e.key.toLowerCase();
-          if (k === " "){
-            e.preventDefault();
-            running = !running;
-            return;
-          }
-          if (k === "r"){
-            resetAll();
-            return;
-          }
-          if (k === "arrowup" || k === "arrowdown") e.preventDefault();
-          keys.add(k);
-        });
-        document.addEventListener("keyup", (e) => {
-          keys.delete(e.key.toLowerCase());
-        });
-        function pointerToCanvas(e){
-          const rect = canvas.getBoundingClientRect();
-          const x = (e.clientX - rect.left) * (canvas.width / rect.width);
-          const y = (e.clientY - rect.top) * (canvas.height / rect.height);
-          return {x, y};
-        }
-        canvas.addEventListener("pointerdown", (e) => {
-          dragging = true;
-          canvas.setPointerCapture(e.pointerId);
-          const p = pointerToCanvas(e);
-          dragSide = (p.x < canvas.width/2) ? "L" : "R";
-        });
-        canvas.addEventListener("pointerup", () => { dragging = false; });
-        canvas.addEventListener("pointercancel", () => { dragging = false; });
-        canvas.addEventListener("pointermove", (e) => {
-          if (!dragging) return;
-          const p = pointerToCanvas(e);
-          if (dragSide === "L"){
-            paddle.yL = clamp(p.y - paddle.h/2, 14, H()-14-paddle.h);
-          }
-        });
-        startBtn.addEventListener("click", () => { running = !running; });
-        resetBtn.addEventListener("click", () => { resetAll(); });
-        // init
-        // roundRect polyfill for older browsers
-        if (!CanvasRenderingContext2D.prototype.roundRect){
-          CanvasRenderingContext2D.prototype.roundRect = function(x,y,w,h,r){
-            const rr = Math.min(r, w/2, h/2);
-            this.beginPath();
-            this.moveTo(x+rr, y);
-            this.arcTo(x+w, y, x+w, y+h, rr);
-            this.arcTo(x+w, y+h, x, y+h, rr);
-            this.arcTo(x, y+h, x, y, rr);
-            this.arcTo(x, y, x+w, y, rr);
-            this.closePath();
-            return this;
-          };
-        }
-        resizeForHiDPI();
-        resetAll();
-        requestAnimationFrame(loop);
-      })();
-    </script>
   </div>
 
   <!-- === HERO / LANDING SECTION === -->
@@ -878,7 +559,7 @@
       <div class="featuredHeader">
         <div class="label">Featured</div>
         <div class="muted" style="font-size:0.95rem;">
-          A few highlights — click “Enter Portfolio” for the full site.
+          A few highlights — click "Enter Portfolio" for the full site.
         </div>
       </div>
       <div class="miniGrid" style="margin-top: 14px;">
@@ -1328,15 +1009,372 @@
     });
 
     // Hidden bonus game toggle on banner click
-    const brand = document.querySelector('.brand');
+    const brand = document.getElementById('brandClick');
     const game = document.getElementById('retro-radar-pong');
-    brand.addEventListener('click', () => {
-      if (game.style.display === 'none' || game.style.display === '') {
-        game.style.display = 'block';
-      } else {
-        game.style.display = 'none';
+    if (brand && game) {
+      brand.addEventListener('click', () => {
+        if (game.style.display === 'none' || game.style.display === '') {
+          game.style.display = 'block';
+          // Initialize game after showing
+          if (!window.rrpInitialized) {
+            initRetroRadarPong();
+          }
+        } else {
+          game.style.display = 'none';
+        }
+      });
+    }
+
+    // === RETRO RADAR PONG GAME ===
+    function initRetroRadarPong() {
+      window.rrpInitialized = true;
+      
+      const canvas = document.getElementById('rrpCanvas');
+      const ctx = canvas.getContext('2d');
+      const startBtn = document.getElementById('rrpStart');
+      const resetBtn = document.getElementById('rrpReset');
+      const scoreEl = document.getElementById('rrpScore');
+      const speedEl = document.getElementById('rrpSpeed');
+      const modeEl = document.getElementById('rrpModeLabel');
+
+      // Colors
+      const GLOW = '#b8ffc2';
+      const GRID = 'rgba(184,255,194,0.10)';
+
+      // Game state
+      let running = false;
+      let lastT = 0;
+      let score = 0; // Changed to single score counter
+      let gameTime = 0; // Track game time for speed increase
+
+      const W = () => canvas.width;
+      const H = () => canvas.height;
+
+      const paddle = {
+        w: 14,
+        h: 96,
+        inset: 28,
+        speed: 640,
+        yL: 0,
+      };
+
+      const ball = {
+        r: 9,
+        x: 0,
+        y: 0,
+        vx: 520,
+        vy: 220,
+        speedScale: 1.0,
+      };
+
+      const keys = new Set();
+      let dragging = false;
+
+      function clamp(v, a, b) {
+        return Math.max(a, Math.min(b, v));
       }
-    });
+
+      function resetRound(servingTo = 'R') {
+        paddle.yL = (H() - paddle.h) / 2;
+        ball.x = W() / 2;
+        ball.y = H() / 2;
+        const dir = (servingTo === 'R') ? 1 : -1;
+        const angle = (Math.random() * 0.6 - 0.3);
+        const base = 520;
+        ball.speedScale = 1.0;
+        ball.vx = dir * base;
+        ball.vy = base * 0.45 * (Math.random() < 0.5 ? -1 : 1) + base * 0.25 * angle;
+        updateHUD();
+      }
+
+      function resetAll() {
+        score = 0;
+        gameTime = 0;
+        resetRound('R');
+        running = false;
+        updateHUD();
+        draw(0);
+      }
+
+      function updateHUD() {
+        scoreEl.textContent = score;
+        speedEl.textContent = `${ball.speedScale.toFixed(2)}×`;
+        modeEl.textContent = 'Practice Mode';
+      }
+
+      function resizeForHiDPI() {
+        const dpr = Math.max(1, Math.floor(window.devicePixelRatio || 1));
+        const rect = canvas.getBoundingClientRect();
+        const targetW = Math.round(rect.width * dpr);
+        const targetH = Math.round((rect.width * 520 / 900) * dpr);
+        
+        if (canvas.width !== targetW || canvas.height !== targetH) {
+          canvas.width = targetW;
+          canvas.height = targetH;
+          resetRound('R');
+          draw(0);
+        }
+      }
+
+      function drawScanlines() {
+        ctx.save();
+        ctx.globalAlpha = 0.12;
+        ctx.fillStyle = 'rgba(184,255,194,0.08)';
+        for (let y = 0; y < H(); y += 3) {
+          ctx.fillRect(0, y, W(), 1);
+        }
+        ctx.restore();
+      }
+
+      function drawGrid() {
+        ctx.save();
+        ctx.strokeStyle = GRID;
+        ctx.lineWidth = 1;
+        ctx.setLineDash([8, 10]);
+        ctx.beginPath();
+        ctx.moveTo(W() / 2, 14);
+        ctx.lineTo(W() / 2, H() - 14);
+        ctx.stroke();
+        ctx.setLineDash([2, 10]);
+        for (let i = 1; i < 6; i++) {
+          const x = (W() / 6) * i;
+          ctx.beginPath();
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x, H());
+          ctx.stroke();
+        }
+        for (let i = 1; i < 4; i++) {
+          const y = (H() / 4) * i;
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          ctx.lineTo(W(), y);
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+
+      function glowFill(fn) {
+        ctx.save();
+        ctx.shadowColor = GLOW;
+        ctx.shadowBlur = 14;
+        ctx.fillStyle = GLOW;
+        fn();
+        ctx.restore();
+      }
+
+      function drawRoundRect(x, y, w, h, r) {
+        const rr = Math.min(r, w / 2, h / 2);
+        ctx.beginPath();
+        ctx.moveTo(x + rr, y);
+        ctx.arcTo(x + w, y, x + w, y + h, rr);
+        ctx.arcTo(x + w, y + h, x, y + h, rr);
+        ctx.arcTo(x, y + h, x, y, rr);
+        ctx.arcTo(x, y, x + w, y, rr);
+        ctx.closePath();
+      }
+
+      function draw(t) {
+        ctx.clearRect(0, 0, W(), H());
+        drawGrid();
+
+        const xL = paddle.inset;
+        const xWall = W() - paddle.inset; // Right wall position
+        
+        // Draw left paddle
+        glowFill(() => {
+          ctx.fillRect(xL, paddle.yL, paddle.w, paddle.h);
+        });
+        
+        // Draw right wall (full height)
+        glowFill(() => {
+          ctx.fillRect(xWall, 14, paddle.w, H() - 28);
+        });
+
+        // Draw ball
+        glowFill(() => {
+          ctx.beginPath();
+          ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        // Ball trail
+        ctx.save();
+        ctx.globalAlpha = 0.10;
+        ctx.fillStyle = GLOW;
+        ctx.beginPath();
+        ctx.arc(ball.x - ball.vx * 0.02, ball.y - ball.vy * 0.02, ball.r * 0.85, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        // Frame
+        ctx.save();
+        ctx.shadowColor = GLOW;
+        ctx.shadowBlur = 12;
+        ctx.strokeStyle = GLOW;
+        ctx.lineWidth = 2;
+        drawRoundRect(8, 8, W() - 16, H() - 16, 16);
+        ctx.stroke();
+        ctx.restore();
+
+        drawScanlines();
+
+        if (!running) {
+          ctx.save();
+          ctx.fillStyle = 'rgba(184,255,194,0.85)';
+          ctx.font = `bold ${Math.max(16, Math.floor(W() / 40))}px ui-monospace, monospace`;
+          ctx.textAlign = 'center';
+          ctx.fillText('Press SPACE or Start to play', W() / 2, H() / 2 - 10);
+          ctx.font = `${Math.max(12, Math.floor(W() / 55))}px ui-monospace, monospace`;
+          ctx.fillStyle = 'rgba(184,255,194,0.70)';
+          ctx.fillText('Keep the ball in play!', W() / 2, H() / 2 + 20);
+          ctx.restore();
+        }
+      }
+
+      function collidePaddle(px, py, pw, ph) {
+        const cx = ball.x, cy = ball.y, r = ball.r;
+        const nearestX = clamp(cx, px, px + pw);
+        const nearestY = clamp(cy, py, py + ph);
+        const dx = cx - nearestX;
+        const dy = cy - nearestY;
+        return (dx * dx + dy * dy) <= r * r;
+      }
+
+      function step(dt) {
+        // Increase game time and speed gradually
+        gameTime += dt;
+        // Speed increases by 0.05 every 5 seconds, capped at 2.5x
+        ball.speedScale = clamp(1.0 + (gameTime / 5) * 0.05, 1.0, 2.5);
+        updateHUD();
+
+        // Player paddle movement
+        const dy = paddle.speed * dt;
+        if (keys.has('w')) paddle.yL -= dy;
+        if (keys.has('s')) paddle.yL += dy;
+        
+        paddle.yL = clamp(paddle.yL, 14, H() - 14 - paddle.h);
+
+        // Move ball
+        ball.x += ball.vx * dt * ball.speedScale;
+        ball.y += ball.vy * dt * ball.speedScale;
+
+        // Wall bounce (top and bottom)
+        if (ball.y - ball.r < 14) {
+          ball.y = 14 + ball.r;
+          ball.vy *= -1;
+        }
+        if (ball.y + ball.r > H() - 14) {
+          ball.y = H() - 14 - ball.r;
+          ball.vy *= -1;
+        }
+
+        // Paddle collision (left side - player)
+        const xL = paddle.inset;
+        if (ball.vx < 0 && collidePaddle(xL, paddle.yL, paddle.w, paddle.h)) {
+          ball.x = xL + paddle.w + ball.r + 0.5;
+          const paddleCenter = paddle.yL + paddle.h / 2;
+          const hitPosition = (ball.y - paddleCenter) / (paddle.h / 2);
+          const maxVy = 520;
+          ball.vx = Math.abs(ball.vx); // Make sure ball goes right
+          ball.vy = clamp(hitPosition * maxVy, -maxVy, maxVy);
+          score += 1; // ONLY score on paddle hit
+          updateHUD();
+        }
+        
+        // Right wall collision (static wall) - NO SCORING
+        const xWall = W() - paddle.inset;
+        if (ball.vx > 0 && ball.x + ball.r >= xWall) {
+          ball.x = xWall - ball.r - 0.5;
+          ball.vx = -Math.abs(ball.vx); // Make sure ball goes left
+          // Removed score increment here - wall bounce doesn't score
+        }
+
+        // Fail condition - ball goes past left edge (player missed it)
+        if (ball.x + ball.r < 0) {
+          running = false;
+          setTimeout(() => {
+            if (confirm(`Game Over! Score: ${score}\n\nPlay again?`)) {
+              resetAll();
+              running = true;
+            } else {
+              resetAll();
+            }
+          }, 100);
+        }
+
+        draw();
+      }
+
+      function loop(t) {
+        if (!lastT) lastT = t;
+        const dt = Math.min(0.02, (t - lastT) / 1000);
+        lastT = t;
+        if (running) step(dt);
+        else draw(t);
+        requestAnimationFrame(loop);
+      }
+
+      window.addEventListener('resize', resizeForHiDPI);
+      
+      document.addEventListener('keydown', (e) => {
+        const k = e.key.toLowerCase();
+        if (k === ' ') {
+          e.preventDefault();
+          running = !running;
+          return;
+        }
+        if (k === 'r') {
+          resetAll();
+          return;
+        }
+        if (k === 'arrowup' || k === 'arrowdown') e.preventDefault();
+        keys.add(k);
+      });
+
+      document.addEventListener('keyup', (e) => {
+        keys.delete(e.key.toLowerCase());
+      });
+
+      function pointerToCanvas(e) {
+        const rect = canvas.getBoundingClientRect();
+        const x = (e.clientX - rect.left) * (canvas.width / rect.width);
+        const y = (e.clientY - rect.top) * (canvas.height / rect.height);
+        return { x, y };
+      }
+
+      canvas.addEventListener('pointerdown', (e) => {
+        dragging = true;
+        canvas.setPointerCapture(e.pointerId);
+      });
+
+      canvas.addEventListener('pointerup', () => {
+        dragging = false;
+      });
+
+      canvas.addEventListener('pointercancel', () => {
+        dragging = false;
+      });
+
+      canvas.addEventListener('pointermove', (e) => {
+        if (!dragging) return;
+        const p = pointerToCanvas(e);
+        if (p.x < canvas.width / 2) {
+          paddle.yL = clamp(p.y - paddle.h / 2, 14, H() - 14 - paddle.h);
+        }
+      });
+
+      startBtn.addEventListener('click', () => {
+        running = !running;
+      });
+
+      resetBtn.addEventListener('click', () => {
+        resetAll();
+      });
+
+      resizeForHiDPI();
+      resetAll();
+      requestAnimationFrame(loop);
+    }
   </script>
 </body>
 </html>
