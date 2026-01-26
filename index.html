@@ -782,8 +782,6 @@
           if (!lastT) lastT = t;
           const dt = Math.min(0.02, (t - lastT) / 1000);
           lastT = t;
-          const dt = Math.min(0.02, (t - lastT) / 1000);
-          lastT = t;
           if (running) step(dt);
           else draw(t);
           requestAnimationFrame(loop);
