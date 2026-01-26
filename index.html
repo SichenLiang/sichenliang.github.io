@@ -18,7 +18,7 @@
       --wash:#f7f5f1; /* warm off-white */
       --navy:#1d2545; /* classic navy */
       --brown:#8b5a2b; /* added for accents matching palette */
-      --blue:##1d2f4e; /* added for contrast accents */
+      --blue:#1d2f4e; /* added for contrast accents */
       --rule:#e7e1d8; /* warm hairline */
       --card:#ffffff;
       --shadow: 0 10px 24px rgba(0,0,0,0.06);
@@ -354,6 +354,10 @@
       justify-content: space-between;
       align-items:center;
     }
+    /* Scroll padding for sticky header */
+    section[data-section] {
+      scroll-margin-top: 80px; /* Adjust this value if needed; prevents header overlap */
+    }
     /* Responsive */
     @media (max-width: 980px){
       .heroGrid{ grid-template-columns: 1fr; }
@@ -367,7 +371,6 @@
   </style>
 </head>
 <body>
-
 <header>
   <div class="wrap topbar">
     <div class="brand">
@@ -383,15 +386,11 @@
       <a href="#skills" data-nav="reveal">Skills</a>
       <a href="#contact" data-nav="reveal">Contact</a>
       <span class="navSep" aria-hidden="true"></span>
-      <a href="https://www.linkedin.com/in/sichen-liang-32933b2b9/" target="_blank" rel="noopener">LinkedIn</a>
-      <span class="navSep" aria-hidden="true"></span>
       <a href="https://makerworld.com/en/@sichen_liang233" target="_blank" rel="noopener">MakerWorld</a>
     </nav>
   </div>
 </header>
-
 <a id="top"></a>
-
 <section class="hero">
   <div class="wrap heroGrid">
     <div>
@@ -411,7 +410,7 @@
         <div class="pill">Mechanical + Electrical Integration</div>
       </div>
       <div class="btnRow" role="group" aria-label="Primary actions">
-        <button class="btn primary" data-action="reveal" data-target="#projects">Enter Portfolio</button>
+        <button class="btn primary" data-action="reveal" data-target="#about">Enter Portfolio</button>
         <button class="btn" data-action="reveal" data-target="#experience">View Experience</button>
         <button class="btn" data-action="reveal" data-target="#contact">Contact</button>
       </div>
@@ -422,7 +421,6 @@
         onerror="this.remove(); this.parentElement.textContent='Image placeholder: assets/portrait.jpg (upload your portrait or a lab photo)';">
     </div>
   </div>
-
   <!-- WELCOME-ONLY PREVIEW -->
   <div class="wrap welcomeOnly" style="padding-top: 22px; padding-bottom: 26px;">
     <div class="featuredHeader">
@@ -450,10 +448,8 @@
     </div>
   </div>
 </section>
-
 <main class="wrap">
   <!-- GATED CONTENT -->
-
   <section id="about" class="gated" data-section>
     <h2>About</h2>
     <p class="sectionLead">
@@ -484,7 +480,6 @@
       </div>
     </div>
   </section>
-
   <section id="interests" class="gated" data-section>
     <h2>Research Interests</h2>
     <p class="sectionLead">
@@ -530,7 +525,6 @@
       </div>
     </div>
   </section>
-
   <section id="experience" class="gated" data-section>
     <h2>Experience</h2>
     <p class="sectionLead">
@@ -605,7 +599,6 @@
       </div>
     </div>
   </section>
-
   <section id="projects" class="gated" data-section>
     <h2>Projects</h2>
     <p class="sectionLead">
@@ -652,7 +645,6 @@
       </div>
     </div>
   </section>
-
   <section id="leadership" class="gated" data-section>
     <h2>Leadership & Activities</h2>
     <div class="card" style="margin-top:14px;">
@@ -718,7 +710,6 @@
       </div>
     </div>
   </section>
-
   <section id="skills" class="gated" data-section>
     <h2>Skills</h2>
     <p class="sectionLead">
@@ -764,11 +755,10 @@
       </div>
     </div>
   </section>
-
   <section id="contact" class="gated" data-section>
     <h2>Contact</h2>
     <p class="sectionLead">
-      Feel free to reach out regarding research, projects, opportunities in control systems / robotics, 
+      Feel free to reach out regarding research, projects, opportunities in control systems / robotics,
       or just to connect.
     </p>
     <div class="card" style="margin-top:14px; max-width:680px;">
@@ -784,7 +774,6 @@
     </div>
   </section>
 </main>
-
 <footer class="wrap">
   <div class="footerGrid">
     <div>© 2026 Sichen Liang — All rights reserved.</div>
@@ -793,27 +782,22 @@
     </div>
   </div>
 </footer>
-
 <script>
 // Reveal logic (lightweight, no dependencies)
 document.addEventListener('click', function(e) {
   const btn = e.target.closest('[data-action="reveal"]');
   if (!btn) return;
-
   e.preventDefault();
   const targetId = btn.getAttribute('data-target');
   if (!targetId) return;
-
   // Reveal everything
   document.body.classList.add('revealed');
-
   // Smooth scroll to target
   const targetEl = document.querySelector(targetId);
   if (targetEl) {
     targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 });
-
 // Also handle nav links with data-nav="reveal"
 document.querySelectorAll('nav a[data-nav="reveal"]').forEach(link => {
   link.addEventListener('click', function(e) {
@@ -825,6 +809,5 @@ document.querySelectorAll('nav a[data-nav="reveal"]').forEach(link => {
   });
 });
 </script>
-
 </body>
 </html>
