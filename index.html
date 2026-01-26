@@ -500,12 +500,11 @@
       <div class="top">
         <div class="title">
           <b>RETRO RADAR PONG</b>
-          <span class="hint">W/S = left paddle · ↑/↓ = right paddle · Space = start/pause · R = reset</span>
+          <span class="hint">W/S = left paddle · Space = start/pause · R = reset</span>
         </div>
         <div class="btns">
           <button id="rrpStart">Start / Pause</button>
           <button id="rrpReset">Reset</button>
-          <button id="rrpMode">Mode: 1P (vs CPU)</button>
         </div>
       </div>
       <div class="row">
@@ -517,10 +516,9 @@
           <div class="stat"><span>Speed</span><span id="rrpSpeed">1.00×</span></div>
           <div class="stat"><span>Mode</span><span id="rrpModeLabel">1P (CPU right)</span></div>
           <div class="small">
-            <div><span class="kbd">Touch/Mouse:</span> drag your paddle (left side). In 2P mode, drag on right half for right paddle.</div>
+            <div><span class="kbd">Touch/Mouse:</span> drag your paddle (left side).</div>
             <div style="margin-top:6px;"><span class="kbd">Tip:</span> This is intentionally “early-game simple”: one ball, two paddles, bouncy physics, no powerups.</div>
           </div>
-          <div class="warning">If your site uses a dark theme already, this will blend in nicely. You can change the glow color in the JS (look for <span class="kbd">GLOW</span>).</div>
         </div>
       </div>
     </div>
@@ -531,7 +529,6 @@
         const ctx = canvas.getContext("2d");
         const startBtn = root.querySelector("#rrpStart");
         const resetBtn = root.querySelector("#rrpReset");
-        const modeBtn = root.querySelector("#rrpMode");
         const scoreEl = root.querySelector("#rrpScore");
         const speedEl = root.querySelector("#rrpSpeed");
         const modeEl = root.querySelector("#rrpModeLabel");
@@ -542,7 +539,7 @@
         // ---- Game state ----
         let running = false;
         let lastT = 0;
-        let onePlayer = true; // CPU on right
+        let onePlayer = true; // Always 1P, no mode switch
         let scoreL = 0, scoreR = 0;
         const W = () => canvas.width;
         const H = () => canvas.height;
@@ -591,8 +588,7 @@
         function updateHUD(){
           scoreEl.textContent = `${scoreL} : ${scoreR}`;
           speedEl.textContent = `${ball.speedScale.toFixed(2)}×`;
-          modeEl.textContent = onePlayer ? "1P (CPU right)" : "2P (both human)";
-          modeBtn.textContent = onePlayer ? "Mode: 1P (vs CPU)" : "Mode: 2P (local)";
+          modeEl.textContent = "1P (CPU right)";
         }
         function resizeForHiDPI(){
           // keep the CSS-driven responsive width, but use devicePixelRatio for crispness
@@ -702,7 +698,7 @@
             ctx.fillText("Press SPACE or Start to play", W()/2, H()/2 - 10);
             ctx.font = `${Math.max(12, Math.floor(W()/55))}px ui-monospace, monospace`;
             ctx.fillStyle = "rgba(184,255,194,0.70)";
-            ctx.fillText(onePlayer ? "You: left paddle (W/S or drag)" : "2P: W/S (left) and ↑/↓ (right)", W()/2, H()/2 + 20);
+            ctx.fillText("You: left paddle (W/S or drag)", W()/2, H()/2 + 20);
             ctx.restore();
           }
         }
@@ -733,16 +729,10 @@
           const dy = paddle.speed * dt;
           if (keys.has("w")) paddle.yL -= dy;
           if (keys.has("s")) paddle.yL += dy;
-          if (!onePlayer){
-            if (keys.has("arrowup")) paddle.yR -= dy;
-            if (keys.has("arrowdown")) paddle.yR += dy;
-          }
           // CPU right paddle
-          if (onePlayer){
-            const target = ball.y - paddle.h/2;
-            const cpuSpeed = 520 * dt;
-            paddle.yR += clamp(target - paddle.yR, -cpuSpeed, cpuSpeed);
-          }
+          const target = ball.y - paddle.h/2;
+          const cpuSpeed = 520 * dt;
+          paddle.yR += clamp(target - paddle.yR, -cpuSpeed, cpuSpeed);
           paddle.yL = clamp(paddle.yL, 14, H()-14-paddle.h);
           paddle.yR = clamp(paddle.yR, 14, H()-14-paddle.h);
           // move ball
@@ -824,17 +814,10 @@
           const p = pointerToCanvas(e);
           if (dragSide === "L"){
             paddle.yL = clamp(p.y - paddle.h/2, 14, H()-14-paddle.h);
-          } else if (!onePlayer){
-            paddle.yR = clamp(p.y - paddle.h/2, 14, H()-14-paddle.h);
           }
         });
         startBtn.addEventListener("click", () => { running = !running; });
         resetBtn.addEventListener("click", () => { resetAll(); });
-        modeBtn.addEventListener("click", () => {
-          onePlayer = !onePlayer;
-          updateHUD();
-          resetRound("R");
-        });
         // init
         // roundRect polyfill for older browsers
         if (!CanvasRenderingContext2D.prototype.roundRect){
