@@ -511,7 +511,7 @@
         <div class="side">
           <div class="stat"><span>Score</span><span id="rrpScore">0</span></div>
           <div class="stat"><span>Speed</span><span id="rrpSpeed">1.00×</span></div>
-          <div class="stat"><span>Mode</span><span id="rrpModeLabel">Practice Mode</span></div>
+          <div class="stat"><span>Mode</span><span id="rrpModeLabel">Default</span></div>
           <div class="small">
             <div><span class="kbd">Touch/Mouse:</span> drag your paddle (left side).</div>
             <div style="margin-top:6px;"><span class="kbd">Goal:</span> Keep the ball in play! It bounces off the right wall.</div>
@@ -959,14 +959,14 @@
         or just to connect.
       </p>
       <div class="card" style="margin-top:14px; max-width:680px;">
-        <p><strong>Email:</strong> sl10445@nyu.edu</p>
+        <p><strong>Email:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e7948bd6d7d3d3d2a7899e92c9828392">[email&#160;protected]</a></p>
         <p><strong>Phone:</strong> (718)431-4806</p>
         <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/sichen-liang-32933b2b9/" target="_blank">linkedin.com/in/sichen-liang-32933b2b9</a></p>
         <p><strong>GitHub:</strong> <a href="https://github.com/SichenLiang" target="_blank">github.com/SichenLiang</a></p>
         <p><strong>MakerWorld:</strong> <a href="https://makerworld.com/en/@sichen_liang233" target="_blank">makerworld.com/en/@sichen_liang233</a></p>
         <p><strong>Location:</strong> New York, USA</p>
         <div class="btnRow" style="margin-top:24px;">
-          <a href="mailto:sl10445@nyu.edu" class="btn primary">Send Email</a>
+          <a href="/cdn-cgi/l/email-protection#3b48570a0b0f0f0e7b55424e155e5f4e" class="btn primary">Send Email</a>
         </div>
       </div>
     </section>
@@ -983,7 +983,7 @@
   </footer>
 
   <!-- === JAVASCRIPT FOR REVEAL & SCROLL === -->
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // Reveal logic (lightweight, no dependencies)
     document.addEventListener('click', function(e) {
       const btn = e.target.closest('[data-action="reveal"]');
@@ -1099,7 +1099,7 @@
       function updateHUD() {
         scoreEl.textContent = score;
         speedEl.textContent = `${ball.speedScale.toFixed(2)}×`;
-        modeEl.textContent = 'Practice Mode';
+        modeEl.textContent = 'Default';
       }
 
       function resizeForHiDPI() {
@@ -1241,10 +1241,10 @@
       }
 
       function step(dt) {
-        // Increase game time and speed gradually
+        // Increase game time and speed gradually - FASTER progression
         gameTime += dt;
-        // Speed increases by 0.05 every 5 seconds, capped at 2.5x
-        ball.speedScale = clamp(1.0 + (gameTime / 5) * 0.05, 1.0, 2.5);
+        // Speed increases by 0.15 every 3 seconds, capped at 3.5x (much faster!)
+        ball.speedScale = clamp(1.0 + (gameTime / 3) * 0.15, 1.0, 3.5);
         updateHUD();
 
         // Player paddle movement
@@ -1292,14 +1292,7 @@
         // Fail condition - ball goes past left edge (player missed it)
         if (ball.x + ball.r < 0) {
           running = false;
-          setTimeout(() => {
-            if (confirm(`Game Over! Score: ${score}\n\nPlay again?`)) {
-              resetAll();
-              running = true;
-            } else {
-              resetAll();
-            }
-          }, 100);
+          // Just stop the game, user can press R to restart
         }
 
         draw();
@@ -1363,18 +1356,4 @@
         }
       });
 
-      startBtn.addEventListener('click', () => {
-        running = !running;
-      });
-
-      resetBtn.addEventListener('click', () => {
-        resetAll();
-      });
-
-      resizeForHiDPI();
-      resetAll();
-      requestAnimationFrame(loop);
-    }
-  </script>
-</body>
-</html>
+      startBtn.
