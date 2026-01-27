@@ -248,23 +248,10 @@
       padding: 14px;
       position: relative;
     }
-    .imgSlot::before {
-      content: "ADD YOUR IMAGE HERE";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-weight: bold;
-      color: #8b0000;
-      background: rgba(255,255,255,0.7);
-      padding: 8px 16px;
-      border-radius: 8px;
-      white-space: nowrap;
-    }
     .imgSlot img{
       width:100%;
       height:100%;
-      object-fit: cover;
+      object-fit: contain;
       display:block;
     }
     .row{
