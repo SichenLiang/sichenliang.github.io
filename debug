@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head><title>Debug Image Loading</title></head>
+<body style="background:#000;color:#0f0;font-family:monospace;padding:20px;">
+<h1>Image Path Debug</h1>
+<p>Testing direct image access:</p>
+
+<h3>Test 1: Root path</h3>
+<img src="myskateboardpic.jpg" style="max-width:200px;border:2px solid #0f0;" 
+     onerror="this.style.border='2px solid red';this.alt='FAILED: myskateboardpic.jpg'" 
+     onload="this.nextElementSibling.textContent='✓ LOADED'">
+<span style="color:lime;margin-left:10px;"></span>
+
+<h3>Test 2: .JPG uppercase</h3>
+<img src="myskateboardpic.JPG" style="max-width:200px;border:2px solid #0f0;" 
+     onerror="this.style.border='2px solid red';this.alt='FAILED: .JPG'" 
+     onload="this.nextElementSibling.textContent='✓ LOADED'">
+<span style="color:lime;margin-left:10px;"></span>
+
+<h3>Test 3: Check actual filename from GitHub</h3>
+<p>Your file is named: <span style="color:yellow;">myskateboardpic.jpg</span></p>
+<p>HTML is looking for: <span style="color:yellow;">myskateboardpic.jpg</span></p>
+
+<h3>Browser Console Errors:</h3>
+<p>Open browser DevTools (F12) and check Console tab for 404 errors</p>
+<p>It will show the EXACT path the browser is trying to load</p>
+
+<script>
+console.log('Current page URL:', window.location.href);
+console.log('Trying to load image from:', window.location.origin + '/myskateboardpic.jpg');
+
+// Try to fetch the image
+fetch('myskateboardpic.jpg')
+  .then(r => {
+    console.log('Image fetch status:', r.status);
+    if(r.status === 200) console.log('✓ Image exists and is accessible');
+    if(r.status === 404) console.log('✗ Image NOT FOUND (404)');
+  })
+  .catch(e => console.error('Fetch error:', e));
+</script>
+</body>
+</html>
