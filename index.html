@@ -868,14 +868,14 @@
         or just to connect.
       </p>
       <div class="card" style="margin-top:14px; max-width:680px;">
-        <p><strong>Email:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e0938cd1d0d4d4d5a08e9995ce858495">[email&#160;protected]</a></p>
+        <p><strong>Email:</strong> sl10445@nyu.edu</p>
         <p><strong>Phone:</strong> (718)431-4806</p>
         <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/sichen-liang-32933b2b9/" target="_blank">linkedin.com/in/sichen-liang-32933b2b9</a></p>
         <p><strong>GitHub:</strong> <a href="https://github.com/SichenLiang" target="_blank">github.com/SichenLiang</a></p>
         <p><strong>MakerWorld:</strong> <a href="https://makerworld.com/en/@sichen_liang233" target="_blank">makerworld.com/en/@sichen_liang233</a></p>
         <p><strong>Location:</strong> New York, USA</p>
         <div class="btnRow" style="margin-top:24px;">
-          <a href="/cdn-cgi/l/email-protection#17647b262723232257796e6239727362" class="btn primary">Send Email</a>
+          <a href="mailto:sl10445@nyu.edu" class="btn primary">Send Email</a>
         </div>
       </div>
     </section>
@@ -890,7 +890,7 @@
     </div>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     (function() {
       'use strict';
       
@@ -1255,4 +1255,19 @@
           startBtn.addEventListener('click', function() {
             running = !running;
           });
-       
+        }
+
+        if (resetBtn) {
+          resetBtn.addEventListener('click', function() {
+            resetAll();
+          });
+        }
+
+        resizeForHiDPI();
+        resetAll();
+        requestAnimationFrame(loop);
+      }
+    })();
+  </script>
+</body>
+</html>
