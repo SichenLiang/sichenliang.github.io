@@ -4,22 +4,16 @@
   <meta charset="UTF-8" />
   <title>Sichen Liang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!--
-    STYLE GOAL:
-    - Ralph Lauren-esque editorial: serif headings, restrained navy, fine rules, generous whitespace.
-    - Welcome-first: only show hero + entry points on first load. Reveal sections on click.
-    - Single-file, fast-loading, no frameworks.
-  -->
   <style>
     :root{
       --ink:#111111;
       --muted:#5a5a5a;
       --paper:#ffffff;
-      --wash:#f7f5f1; /* warm off-white */
-      --navy:#1d2545; /* classic navy */
-      --brown:#8b5a2b; /* added for accents matching palette */
-      --blue:#1d2f4e; /* added for contrast accents */
-      --rule:#e7e1d8; /* warm hairline */
+      --wash:#f7f5f1;
+      --navy:#1d2545;
+      --brown:#8b5a2b;
+      --blue:#1d2f4e;
+      --rule:#e7e1d8;
       --card:#ffffff;
       --shadow: 0 10px 24px rgba(0,0,0,0.06);
       --radius: 14px;
@@ -35,7 +29,6 @@
       font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
                    Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
     }
-    /* === TYPOGRAPHY === */
     h1,h2,h3{
       font-family: ui-serif, "Georgia", "Times New Roman", Times, serif;
       letter-spacing: 0.2px;
@@ -67,12 +60,8 @@
       border-bottom: 1px solid rgba(144,202,249,0.25);
     }
     a:hover{ border-bottom-color: rgba(144,202,249,0.65); }
-
-    /* === LAYOUT & UTILITIES === */
     .wrap{ max-width: 1120px; margin: 0 auto; padding: 0 22px; }
     .rule{ height:1px; background: var(--rule); margin: 18px 0 0 0; }
-
-    /* === TOP BAR / HEADER === */
     header{
       position: sticky;
       top: 0;
@@ -93,19 +82,19 @@
       flex-direction:column;
       line-height:1.25;
       min-width: 200px;
-      cursor: pointer; /* Make it clickable for hidden game */
+      cursor: pointer;
     }
     .brand .name{
       font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
       font-weight: 800;
       letter-spacing: 0.55px;
-      color: #ffffff; /* Changed to white for visibility on dark blue bg */
+      color: #ffffff;
       font-size: 1.06rem;
       text-transform: uppercase;
     }
     .brand .tag{
       font-size: 0.9rem;
-      color: #e0e0e0; /* Light gray-white for tagline visibility */
+      color: #e0e0e0;
     }
     nav{
       display:flex;
@@ -117,20 +106,18 @@
     nav a{
       border-bottom: none;
       font-size: 0.86rem;
-      color: #ffffff; /* Changed to white for visibility on dark blue bg */
+      color: #ffffff;
       padding: 7px 10px;
       border-radius: 999px;
       letter-spacing: 0.8px;
       text-transform: uppercase;
     }
-    nav a:hover{ background: rgba(255,255,255,0.15); } /* Subtle hover on dark bg */
+    nav a:hover{ background: rgba(255,255,255,0.15); }
     .navSep{
       width:1px; height:18px;
-      background: rgba(255,255,255,0.3); /* Light separator on dark bg */
+      background: rgba(255,255,255,0.3);
       margin: 0 4px;
     }
-
-    /* === BUTTONS === */
     .btnRow{ display:flex; flex-wrap:wrap; gap: 10px; margin-top: 16px; }
     .btn{
       display:inline-flex;
@@ -155,8 +142,6 @@
     }
     .btn.primary:hover{ filter: brightness(1.04); }
     .btn:focus{ outline: 3px solid var(--focus); outline-offset: 2px; }
-
-    /* === HERO SECTION === */
     .hero{
       background: linear-gradient(180deg, var(--wash), #ffffff);
       padding: 62px 0 26px 0;
@@ -210,15 +195,11 @@
       object-fit: cover;
       display:block;
     }
-
-    /* === MAIN CONTENT === */
     main{ padding: 22px 0 72px 0; }
     .sectionLead{
       max-width: 860px;
       color: var(--muted);
     }
-
-    /* === CARDS & GRIDS === */
     .grid2{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -249,8 +230,6 @@
       padding: 0;
     }
     .card li{ margin-bottom: 8px; }
-
-    /* === IMAGE SLOTS (PLACEHOLDERS) === */
     .imgSlot{
       border-radius: 12px;
       background: #d9d3ca;
@@ -261,7 +240,7 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      color: #8b0000; /* Dark red for visibility */
+      color: #8b0000;
       font-size: 1.1rem;
       font-weight: bold;
       text-align:center;
@@ -287,8 +266,6 @@
       object-fit: cover;
       display:block;
     }
-
-    /* === TIMELINE ROWS === */
     .row{
       display:flex;
       gap: 18px;
@@ -322,14 +299,10 @@
       letter-spacing: 0.6px;
       text-transform: uppercase;
     }
-
-    /* === WELCOME GATING === */
     .welcomeOnly{ display:block; }
     .gated{ display:none; }
     body.revealed .gated{ display:block; }
     body.revealed .welcomeOnly{ display:none; }
-
-    /* === FEATURED PREVIEW (WELCOME) === */
     .featuredHeader{
       display:flex;
       justify-content:space-between;
@@ -366,8 +339,6 @@
     }
     .miniCard h3{ margin: 0 0 6px 0; }
     .miniCard p{ margin: 0; color: var(--muted); font-size: 0.95rem; }
-
-    /* === FOOTER === */
     footer{
       border-top: 1px solid var(--rule);
       padding: 28px 0 34px 0;
@@ -382,13 +353,9 @@
       justify-content: space-between;
       align-items:center;
     }
-
-    /* === SCROLL PADDING FOR STICKY HEADER === */
     section[data-section] {
-      scroll-margin-top: 80px; /* Prevents header overlap on scroll */
+      scroll-margin-top: 80px;
     }
-
-    /* === RESPONSIVE === */
     @media (max-width: 980px){
       .heroGrid{ grid-template-columns: 1fr; }
       .portrait{ max-width: 420px; }
@@ -398,10 +365,77 @@
       .when{ min-width: 130px; }
       nav{ justify-content:flex-start; }
     }
+    #retro-pong { display:none; max-width:780px; margin:24px auto; }
+    #retro-pong .wrap{
+      border:1px solid rgba(0,0,0,.15);
+      border-radius:14px;
+      padding:14px;
+      background: #070b0f;
+      box-shadow: 0 10px 24px rgba(0,0,0,.10);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      color:#c7ffcf;
+    }
+    #retro-pong .top{
+      display:flex;
+      gap:12px;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+    #retro-pong .title{
+      display:flex; gap:10px; align-items:baseline; flex-wrap:wrap;
+      letter-spacing:.5px;
+    }
+    #retro-pong .title b{ color:#e8ffea; }
+    #retro-pong .hint{ color:#96d99e; opacity:.9; font-size:12px; }
+    #retro-pong .btns{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+    #retro-pong button{
+      background: transparent;
+      border:1px solid rgba(199,255,207,.35);
+      color:#c7ffcf;
+      padding:7px 10px;
+      border-radius:10px;
+      cursor:pointer;
+      font-size:12px;
+    }
+    #retro-pong button:hover{ border-color: rgba(199,255,207,.65); }
+    #retro-pong .row{
+      display:flex;
+      gap:12px;
+      align-items:stretch;
+      flex-wrap:wrap;
+      border-bottom: none;
+      padding: 0;
+    }
+    #retro-pong canvas{
+      width:100%;
+      height:auto;
+      border-radius:12px;
+      border:1px solid rgba(199,255,207,.18);
+      background: radial-gradient(ellipse at center, rgba(23,60,30,.45) 0%, rgba(0,0,0,0) 60%),
+                  linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.65));
+      display:block;
+      touch-action:none;
+    }
+    #retro-pong .side{
+      min-width:220px;
+      flex: 0 0 220px;
+      border:1px solid rgba(199,255,207,.18);
+      border-radius:12px;
+      padding:10px;
+      background: rgba(0,0,0,.25);
+    }
+    #retro-pong .stat{ display:flex; justify-content:space-between; font-size:12px; padding:6px 0; border-bottom:1px solid rgba(199,255,207,.10); }
+    #retro-pong .stat:last-child{ border-bottom:none; }
+    #retro-pong .kbd{ color:#e8ffea; }
+    #retro-pong .small{ font-size:11px; color:#96d99e; opacity:.9; line-height:1.35; margin-top:8px;}
+    @media (max-width: 720px){
+      #retro-pong .side{ flex:1 1 auto; min-width:unset; }
+    }
   </style>
 </head>
 <body>
-  <!-- === HEADER / TOP NAVIGATION BAR === -->
   <header>
     <div class="wrap topbar">
       <div class="brand" id="brandClick">
@@ -424,75 +458,7 @@
 
   <a id="top"></a>
 
-  <!-- === HIDDEN BONUS GAME (Retro Radar Pong) - Hidden by default, toggles on banner click === -->
-  <div id="retro-radar-pong" style="display:none; max-width:780px;margin:24px auto;">
-    <style>
-      #retro-radar-pong .wrap{
-        border:1px solid rgba(0,0,0,.15);
-        border-radius:14px;
-        padding:14px;
-        background: #070b0f;
-        box-shadow: 0 10px 24px rgba(0,0,0,.10);
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-        color:#c7ffcf;
-      }
-      #retro-radar-pong .top{
-        display:flex;
-        gap:12px;
-        justify-content:space-between;
-        align-items:center;
-        flex-wrap:wrap;
-        margin-bottom:10px;
-      }
-      #retro-radar-pong .title{
-        display:flex; gap:10px; align-items:baseline; flex-wrap:wrap;
-        letter-spacing:.5px;
-      }
-      #retro-radar-pong .title b{ color:#e8ffea; }
-      #retro-radar-pong .hint{ color:#96d99e; opacity:.9; font-size:12px; }
-      #retro-radar-pong .btns{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
-      #retro-radar-pong button{
-        background: transparent;
-        border:1px solid rgba(199,255,207,.35);
-        color:#c7ffcf;
-        padding:7px 10px;
-        border-radius:10px;
-        cursor:pointer;
-        font-size:12px;
-      }
-      #retro-radar-pong button:hover{ border-color: rgba(199,255,207,.65); }
-      #retro-radar-pong .row{
-        display:flex;
-        gap:12px;
-        align-items:stretch;
-        flex-wrap:wrap;
-      }
-      #retro-radar-pong canvas{
-        width:100%;
-        height:auto;
-        border-radius:12px;
-        border:1px solid rgba(199,255,207,.18);
-        background: radial-gradient(ellipse at center, rgba(23,60,30,.45) 0%, rgba(0,0,0,0) 60%),
-                    linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.65));
-        display:block;
-        touch-action:none;
-      }
-      #retro-radar-pong .side{
-        min-width:220px;
-        flex: 0 0 220px;
-        border:1px solid rgba(199,255,207,.18);
-        border-radius:12px;
-        padding:10px;
-        background: rgba(0,0,0,.25);
-      }
-      #retro-radar-pong .stat{ display:flex; justify-content:space-between; font-size:12px; padding:6px 0; border-bottom:1px solid rgba(199,255,207,.10); }
-      #retro-radar-pong .stat:last-child{ border-bottom:none; }
-      #retro-radar-pong .kbd{ color:#e8ffea; }
-      #retro-radar-pong .small{ font-size:11px; color:#96d99e; opacity:.9; line-height:1.35; margin-top:8px;}
-      @media (max-width: 720px){
-        #retro-radar-pong .side{ flex:1 1 auto; min-width:unset; }
-      }
-    </style>
+  <div id="retro-pong">
     <div class="wrap">
       <div class="top">
         <div class="title">
@@ -521,7 +487,6 @@
     </div>
   </div>
 
-  <!-- === HERO / LANDING SECTION === -->
   <section class="hero">
     <div class="wrap heroGrid">
       <div>
@@ -553,7 +518,6 @@
       </div>
     </div>
 
-    <!-- WELCOME-ONLY PREVIEW (visible before revealing full site) -->
     <div class="wrap welcomeOnly" style="padding-top: 22px; padding-bottom: 26px;">
       <div class="featuredHeader">
         <div class="label">Featured</div>
@@ -581,14 +545,11 @@
     </div>
   </section>
 
-  <!-- === MAIN CONTENT (revealed after clicking Enter Portfolio or nav links) === -->
   <main class="wrap">
-
-    <!-- SECTION: About -->
     <section id="about" class="gated" data-section>
       <h2>About</h2>
       <p class="sectionLead">
-        As a determined and focused student, I strive to advance my career through a demanding internship opportunity. I am an active learner and I am willing to execute any assigned tasks. My strong motivation and commitment to push my limits make me believe that the best way to improve is by accepting new challenges, irrespective of how hard they may be. My studies have equipped me with fundamental technical and analytical skills, but I am most passionate about furthering my experience professionally. More so, I am ready to tackle challenges with a willing heart, steadfastness, and great enthusiasm. I tend to stay late, ask the right questions, and handle unforeseen problems that arise during the projects at hand. Teamwork is very important to me. I enjoy working together and learning from each other's strengths and successes. If self-motivated individuals who are not afraid of challenges are what you seek, I am willing to show you what I can do for your company. Provide the opportunity, and I will give you my everything. Together, we can accomplish amazing things, one project at a time.
+        As a determined and focused student, I strive to advance my career through a demanding internship opportunity. I am an active learner and I am willing to execute any assigned tasks. My strong motivation and commitment to push my limits make me believe that the best way to improve is by accepting new challenges, irrespective of how hard they may be.
       </p>
       <div class="grid2">
         <div class="card">
@@ -608,7 +569,6 @@
             <li>Fabrication & prototyping: 3D printing, CNC machining, iterative mechanical design.</li>
             <li>Simulation & analysis exposure (e.g., FEA-based structure optimization study).</li>
           </ul>
-          <!-- TO ADD IMAGE HERE: Replace src with your file path (e.g., assets/your_image.jpg). Upload the image to your 'assets/' folder on your website host. If using GitHub Pages or similar, commit the image file. -->
           <div class="imgSlot">
             <img loading="lazy" src="assets/technicalfoundation.jpg" alt="Technical foundation example"
               onerror="this.remove(); this.parentElement.textContent='Image placeholder: assets/technicalfoundation.jpg';">
@@ -617,7 +577,6 @@
       </div>
     </section>
 
-    <!-- SECTION: Research Interests -->
     <section id="interests" class="gated" data-section>
       <h2>Research Interests</h2>
       <p class="sectionLead">
@@ -628,7 +587,6 @@
         <div class="card">
           <h3>Control & Cyber-Physical Systems</h3>
           <p class="muted">Bridging theory to real behavior in physical systems.</p>
-          <!-- TO ADD IMAGE HERE: Replace src with your file path (e.g., assets/your_image.jpg). Upload the image to your 'assets/' folder on your website host. If using GitHub Pages or similar, commit the image file. -->
           <div class="imgSlot">
             <img loading="lazy" src="assets/controlsystems.jpg" alt="Control systems visualization"
               onerror="this.remove(); this.parentElement.textContent='Image placeholder: assets/controlsystems.jpg';">
@@ -641,7 +599,6 @@
         <div class="card">
           <h3>Robotics</h3>
           <p class="muted">Sensing–actuation loops and system integration.</p>
-          <!-- TO ADD IMAGE HERE: Replace src with your file path (e.g., assets/your_image.jpg). Upload the image to your 'assets/' folder on your website host. If using GitHub Pages or similar, commit the image file. -->
           <div class="imgSlot">
             <img loading="lazy" src="assets/robotics.jpg" alt="Robotics example"
               onerror="this.remove(); this.parentElement.textContent='Image placeholder: assets/robotics.jpg';">
@@ -654,7 +611,6 @@
         <div class="card">
           <h3>Embedded & Motor Control</h3>
           <p class="muted">From PCB + firmware to measurable performance.</p>
-          <!-- TO ADD IMAGE HERE: Replace src with your file path (e.g., assets/your_image.jpg). Upload the image to your 'assets/' folder on your website host. If using GitHub Pages or similar, commit the image file. -->
           <div class="imgSlot">
             <img loading="lazy" src="assets/embedded.jpg" alt="Embedded motor control"
               onerror="this.remove(); this.parentElement.textContent='Image placeholder: assets/embedded.jpg';">
@@ -667,14 +623,12 @@
       </div>
     </section>
 
-    <!-- SECTION: Experience -->
     <section id="experience" class="gated" data-section>
       <h2>Experience</h2>
       <p class="sectionLead">
         Selected experiences spanning industry internship, lab research, and systems-level design.
       </p>
       <div class="card" style="margin-top:14px;">
-        <!-- XPeng Motors (two image slots) -->
         <div class="row">
           <div class="when">05/2025 – 08/2025</div>
           <div class="what">
@@ -684,16 +638,14 @@
               <span class="muted">Product Management · Guangzhou, China</span>
             </div>
             <ul>
-              <li>Conducted comprehensive market research on EV adoption trends in Japan, Indonesia, and Brazil; produced analytical reports with bubble-maps visualizations and predictive demand models</li>
-              <li>Collaborated with cross-functional engineering and product teams to perform competitive benchmarking and support early-stage product strategy discussions</li>
-              <li>Built a custom web-crawler and Excel automation workflow to streamline Hong Kong sales-tracking reports, significantly improving data aggregation efficiency and reducing manual processing time</li>
+              <li>Conducted comprehensive market research on EV adoption trends in Japan, Indonesia, and Brazil</li>
+              <li>Collaborated with cross-functional engineering and product teams to perform competitive benchmarking</li>
+              <li>Built a custom web-crawler and Excel automation workflow to streamline Hong Kong sales-tracking reports</li>
             </ul>
-            <!-- IMAGE SLOT 1 for XPeng - TO ADD IMAGE: Replace src with your file path (e.g., assets/your_image.jpg). Upload the image to your 'assets/' folder on your website host. If using GitHub Pages or similar, commit the image file. -->
             <div class="imgSlot">
               <img loading="lazy" src="assets/xpeng1.jpg" alt="XPeng Motors experience - image 1"
                 onerror="this.remove(); this.parentElement.textContent='Image placeholder: assets/xpeng1.jpg';">
             </div>
-            <!-- IMAGE SLOT 2 for XPeng - TO ADD IMAGE: Replace src with your file path (e.g., assets/your_image.jpg). Upload the image to your 'assets/' folder on your website host. If using GitHub Pages or similar, commit the image file. -->
             <div class="imgSlot">
               <img loading="lazy" src="assets/xpeng2.jpg" alt="XPeng Motors experience - image 2"
                 onerror="this.remove(); this.parentElement.textContent='Image placeholder: assets/xpeng2.jpg';">
@@ -701,7 +653,6 @@
           </div>
         </div>
 
-        <!-- Biomechatronics and Intelligent Robotics Lab (BIOROLAB) - two image slots -->
         <div class="row">
           <div class="when">10/2025 – Present</div>
           <div class="what">
@@ -711,17 +662,15 @@
               <span class="muted">NYU · Supervisor: Dr. Hao Su</span>
             </div>
             <ul>
-              <li>Designed a custom PCB for distributed motor-control modules, integrating drivers, sensing units, and embedded safety protections for real-time actuation</li>
-              <li>Programmed coordination firmware to synchronize multi-joint motor behavior, improving closed-loop response stability and control accuracy</li>
-              <li>Modeled motor housings and structural components for robot-assisted neurointervention/thrombectomy systems using Creo; optimized designs for manufacturability and assembly</li>
-              <li>Evaluated human–exoskeleton interaction using motion-tracking and balance-assessment workflows, focusing on gait symmetry, user intent detection, and control robustness</li>
+              <li>Designed custom PCB for distributed motor-control modules</li>
+              <li>Programmed coordination firmware to synchronize multi-joint motor behavior</li>
+              <li>Modeled motor housings and structural components using Creo</li>
+              <li>Evaluated human–exoskeleton interaction using motion-tracking workflows</li>
             </ul>
-            <!-- IMAGE SLOT 1 for BIOROLAB - TO ADD IMAGE: Replace src with your file path (e.g., assets/your_image.jpg). Upload the image to your 'assets/' folder on your website host. If using GitHub Pages or similar, commit the image file. -->
             <div class="imgSlot">
               <img loading="lazy" src="assets/biorolab1.jpg" alt="BIOROLAB research - image 1"
                 onerror="this.remove(); this.parentElement.textContent='Image placeholder: assets/biorolab1.jpg';">
             </div>
-            <!-- IMAGE SLOT 2 for BIOROLAB - TO ADD IMAGE: Replace src with your file path (e.g., assets/your_image.jpg). Upload the image to your 'assets/' folder on your website host. If using GitHub Pages or similar, commit the image file. -->
             <div class="imgSlot">
               <img loading="lazy" src="assets/biorolab2.jpg" alt="BIOROLAB research - image 2"
                 onerror="this.remove(); this.parentElement.textContent='Image placeholder: assets/biorolab2.jpg';">
@@ -729,7 +678,6 @@
           </div>
         </div>
 
-        <!-- FRC Team 5451 - one image slot -->
         <div class="row">
           <div class="when">2022 – 2023</div>
           <div class="what">
@@ -741,7 +689,6 @@
               <li>Core Member and Leader</li>
               <li>Designed adapting piece between cam and shooter by program adjustments using JAVA</li>
             </ul>
-            <!-- IMAGE SLOT for FRC 5451 - TO ADD IMAGE: Replace src with your file path (e.g., assets/your_image.jpg). Upload the image to your 'assets/' folder on your website host. If using GitHub Pages or similar, commit the image file. -->
             <div class="imgSlot">
               <img loading="lazy" src="assets/frc.jpg" alt="FRC Team 5451 experience"
                 onerror="this.remove(); this.parentElement.textContent='Image placeholder: assets/frc.jpg';">
@@ -749,7 +696,6 @@
           </div>
         </div>
 
-        <!-- Volunteer Teacher (no image requested, kept as is) -->
         <div class="row">
           <div class="when">2021 – 2022</div>
           <div class="what">
@@ -760,14 +706,12 @@
             <ul>
               <li>Worked as volunteer teacher in Hunan, China with friends</li>
               <li>Set up creative classes and coursework for kids at school to learn and have fun</li>
-              <li>Learned to adapt new teaching methods based on student progress and feedback</li>
             </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SECTION: Projects -->
     <section id="projects" class="gated" data-section>
       <h2>Projects</h2>
       <p class="sectionLead">
@@ -778,15 +722,14 @@
         <div class="card">
           <div class="meta">09/2024 – 11/2024 · Academic Project</div>
           <h3>NYU Tandon Building Redesign (MetroTech 6)</h3>
-          <!-- TO ADD IMAGE HERE: Replace src with your file path (e.g., assets/your_image.jpg). Upload the image to your 'assets/' folder on your website host. If using GitHub Pages or similar, commit the image file. -->
           <div class="imgSlot">
             <img loading="lazy" src="assets/revit.jpg" alt="Revit building redesign"
               onerror="this.remove(); this.parentElement.textContent='Image placeholder: assets/revit.jpg';">
           </div>
           <ul>
-            <li>Directed conceptual redesign of the NYU Metro 6 building layout, coordinating architectural sketches and system-integration planning</li>
+            <li>Directed conceptual redesign of the NYU Metro 6 building layout</li>
             <li>Built full-scale digital models in Revit, including electrical mechanical and plumbing systems routing</li>
-            <li>Fabricated a scaled physical prototype to validate structural configuration and spatial functionality</li>
+            <li>Fabricated a scaled physical prototype to validate structural configuration</li>
           </ul>
         </div>
         <div class="card">
@@ -797,7 +740,6 @@
             <li>Run multiple finite element analysis and simulation</li>
             <li>10-page paper ready to publish</li>
           </ul>
-          <!-- IMAGE SLOT for Bike Frame Structure Optimization - TO ADD IMAGE: Replace src with your file path (e.g., assets/your_image.jpg). Upload the image to your 'assets/' folder on your website host. If using GitHub Pages or similar, commit the image file. -->
           <div class="imgSlot">
             <img loading="lazy" src="assets/bikeansys.jpg" alt="Bike Frame Structure Optimization"
               onerror="this.remove(); this.parentElement.textContent='Image placeholder: assets/bikeansys.jpg';">
@@ -806,7 +748,6 @@
         <div class="card">
           <div class="meta">Independent Engineering</div>
           <h3>Prototyping & Structure Design</h3>
-          <!-- TO ADD IMAGE HERE: Replace src with your file path (e.g., assets/your_image.jpg). Upload the image to your 'assets/' folder on your website host. If using GitHub Pages or similar, commit the image file. -->
           <div class="imgSlot">
             <img loading="lazy" src="assets/3dskate.jpg" alt="Prototyping work"
               onerror="this.remove(); this.parentElement.textContent='Image placeholder: assets/3dskate.jpg';">
@@ -815,18 +756,14 @@
             <li>Designed and 3D-printed longboard components with iterative fit/feedback cycles</li>
             <li>CNC-prototyped a carbon-fiber deck</li>
             <li>Implemented 3D toe wedge solutions; focused on geometry and reliability</li>
-            <li>Explored structure optimization topics (including an FEA-based bike frame study)</li>
-            <li>Selected implementations: non-inverting op-amp testing; mechanism design (Team 5451, 2022)</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- SECTION: Leadership & Activities (reorganized per request) -->
     <section id="leadership" class="gated" data-section>
       <h2>Leadership & Activities</h2>
       <div class="card" style="margin-top:14px;">
-        <!-- NYU Cycling Club -->
         <div class="row">
           <div class="when">09/2023 – Present</div>
           <div class="what">
@@ -835,13 +772,10 @@
               <span class="badge">Vice President</span>
             </div>
             <ul>
-              <li>Organized and hosted two University-wide Club Festivals, overseeing event promotion, and recruitment of 100+ participants</li>
-              <li>Led weekly structured training sessions focused on sprint mechanics, interval conditioning, and bike-handling control</li>
-              <li>Managed logistics, budgeting, and safety protocols for regional racing events, including long-distance travel and planning</li>
-              <li>Founder & Leader of High School Cycling Club (2022-2025)</li>
-              <li>Host group rides on a weekly basis</li>
+              <li>Organized and hosted two University-wide Club Festivals</li>
+              <li>Led weekly structured training sessions focused on sprint mechanics</li>
+              <li>Managed logistics, budgeting, and safety protocols for regional racing events</li>
             </ul>
-            <!-- TO ADD IMAGE HERE: Replace src with your file path (e.g., assets/your_image.jpg). Upload the image to your 'assets/' folder on your website host. If using GitHub Pages or similar, commit the image file. -->
             <div class="imgSlot">
               <img loading="lazy" src="assets/cycling.jpg" alt="NYU Cycling Club activities"
                 onerror="this.remove(); this.parentElement.textContent='Image placeholder: assets/cycling.jpg';">
@@ -849,7 +783,6 @@
           </div>
         </div>
 
-        <!-- Badminton Club (one image slot) -->
         <div class="row">
           <div class="when">2020 – 2023</div>
           <div class="what">
@@ -859,10 +792,8 @@
             </div>
             <ul>
               <li>Founded School Badminton Club</li>
-              <li>Organized badminton events between houses, and personally participated</li>
-              <li>Organize regular training sessions</li>
+              <li>Organized badminton events between houses</li>
             </ul>
-            <!-- IMAGE SLOT for Badminton Club - TO ADD IMAGE: Replace src with your file path (e.g., assets/your_image.jpg). Upload the image to your 'assets/' folder on your website host. If using GitHub Pages or similar, commit the image file. -->
             <div class="imgSlot">
               <img loading="lazy" src="assets/badminton.jpg" alt="Badminton Club activities"
                 onerror="this.remove(); this.parentElement.textContent='Image placeholder: assets/badminton.jpg';">
@@ -870,8 +801,6 @@
           </div>
         </div>
 
-        <!-- Student Government (moved under Awards as requested) -->
-        <!-- Awards section with "Awards" title and one image slot -->
         <div class="row">
           <div class="when">Awards</div>
           <div class="what">
@@ -882,28 +811,15 @@
               <li>Champion, 2023 Beijing Longboard Marathon (U18 Division)</li>
               <li>7th Place, 2025 Reddish Knob Downhill Race (Open Class)</li>
             </ul>
-            <!-- IMAGE SLOT for Awards - TO ADD IMAGE: Replace src with your file path (e.g., assets/your_image.jpg). Upload the image to your 'assets/' folder on your website host. If using GitHub Pages or similar, commit the image file. -->
             <div class="imgSlot">
               <img loading="lazy" src="assets/awards.jpg" alt="Awards"
                 onerror="this.remove(); this.parentElement.textContent='Image placeholder: assets/awards.jpg';">
             </div>
-
-            <!-- Student Government (placed under Awards as requested) -->
-            <div class="titleLine" style="margin-top: 20px;">
-              <h3 style="margin:0;">Student Government</h3>
-              <span class="badge">Core Member</span>
-            </div>
-            <ul>
-              <li>Core member of student union & volunteer teacher</li>
-              <li>Lead school events such as music festival, charity sell</li>
-              <li>Worked as volunteer teacher to teach primary school students about poems, literatures</li>
-            </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SECTION: Skills -->
     <section id="skills" class="gated" data-section>
       <h2>Skills</h2>
       <p class="sectionLead">
@@ -921,9 +837,7 @@
             <li>SolidWorks</li>
             <li>ANSYS</li>
             <li>Revit</li>
-            <li>Bambu Lab</li>
             <li>AutoCAD</li>
-            <li>CAD Tools</li>
           </ul>
         </div>
         <div class="card">
@@ -935,9 +849,6 @@
             <li>Mechanical design</li>
             <li>Rapid prototyping</li>
             <li>Team Leadership</li>
-            <li>Programming</li>
-            <li>Machine Learning</li>
-            <li>Scholarly Research</li>
           </ul>
         </div>
         <div class="card">
@@ -950,7 +861,6 @@
       </div>
     </section>
 
-    <!-- SECTION: Contact -->
     <section id="contact" class="gated" data-section>
       <h2>Contact</h2>
       <p class="sectionLead">
@@ -958,20 +868,19 @@
         or just to connect.
       </p>
       <div class="card" style="margin-top:14px; max-width:680px;">
-        <p><strong>Email:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e7948bd6d7d3d3d2a7899e92c9828392">[email&#160;protected]</a></p>
+        <p><strong>Email:</strong> sl10445@nyu.edu</p>
         <p><strong>Phone:</strong> (718)431-4806</p>
         <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/sichen-liang-32933b2b9/" target="_blank">linkedin.com/in/sichen-liang-32933b2b9</a></p>
         <p><strong>GitHub:</strong> <a href="https://github.com/SichenLiang" target="_blank">github.com/SichenLiang</a></p>
         <p><strong>MakerWorld:</strong> <a href="https://makerworld.com/en/@sichen_liang233" target="_blank">makerworld.com/en/@sichen_liang233</a></p>
         <p><strong>Location:</strong> New York, USA</p>
         <div class="btnRow" style="margin-top:24px;">
-          <a href="/cdn-cgi/l/email-protection#3b48570a0b0f0f0e7b55424e155e5f4e" class="btn primary">Send Email</a>
+          <a href="mailto:sl10445@nyu.edu" class="btn primary">Send Email</a>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- === FOOTER === -->
   <footer class="wrap">
     <div class="footerGrid">
       <div>© 2026 Sichen Liang — All rights reserved.</div>
@@ -981,378 +890,384 @@
     </div>
   </footer>
 
-  <!-- === JAVASCRIPT FOR REVEAL & SCROLL === -->
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    // Reveal logic (lightweight, no dependencies)
-    document.addEventListener('click', function(e) {
-      const btn = e.target.closest('[data-action="reveal"]');
-      if (!btn) return;
-      e.preventDefault();
-      const targetId = btn.getAttribute('data-target');
-      if (!targetId) return;
-      document.body.classList.add('revealed');
-      const targetEl = document.querySelector(targetId);
-      if (targetEl) {
-        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-
-    document.querySelectorAll('nav a[data-nav="reveal"]').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.body.classList.add('revealed');
-        const href = this.getAttribute('href');
-        const target = document.querySelector(href);
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
-      });
-    });
-
-    // Hidden bonus game toggle on banner click
-    const brand = document.getElementById('brandClick');
-    const game = document.getElementById('retro-radar-pong');
-    if (brand && game) {
-      brand.addEventListener('click', () => {
-        if (game.style.display === 'none' || game.style.display === '') {
-          game.style.display = 'block';
-          // Initialize game after showing
-          if (!window.rrpInitialized) {
-            initRetroRadarPong();
-          }
-        } else {
-          game.style.display = 'none';
-        }
-      });
-    }
-
-    // === RETRO RADAR PONG GAME ===
-    function initRetroRadarPong() {
-      window.rrpInitialized = true;
+  <script>
+    (function() {
+      'use strict';
       
-      const canvas = document.getElementById('rrpCanvas');
-      const ctx = canvas.getContext('2d');
-      const startBtn = document.getElementById('rrpStart');
-      const resetBtn = document.getElementById('rrpReset');
-      const scoreEl = document.getElementById('rrpScore');
-      const speedEl = document.getElementById('rrpSpeed');
-      const modeEl = document.getElementById('rrpModeLabel');
-
-      // Colors
-      const GLOW = '#b8ffc2';
-      const GRID = 'rgba(184,255,194,0.10)';
-
-      // Game state
-      let running = false;
-      let lastT = 0;
-      let score = 0; // Changed to single score counter
-      let gameTime = 0; // Track game time for speed increase
-
-      const W = () => canvas.width;
-      const H = () => canvas.height;
-
-      const paddle = {
-        w: 14,
-        h: 96,
-        inset: 28,
-        speed: 640,
-        yL: 0,
-      };
-
-      const ball = {
-        r: 9,
-        x: 0,
-        y: 0,
-        vx: 520,
-        vy: 220,
-        speedScale: 1.0,
-      };
-
-      const keys = new Set();
-      let dragging = false;
-
-      function clamp(v, a, b) {
-        return Math.max(a, Math.min(b, v));
-      }
-
-      function resetRound(servingTo = 'R') {
-        paddle.yL = (H() - paddle.h) / 2;
-        ball.x = W() / 2;
-        ball.y = H() / 2;
-        const dir = (servingTo === 'R') ? 1 : -1;
-        const angle = (Math.random() * 0.6 - 0.3);
-        const base = 520;
-        ball.speedScale = 1.0;
-        ball.vx = dir * base;
-        ball.vy = base * 0.45 * (Math.random() < 0.5 ? -1 : 1) + base * 0.25 * angle;
-        updateHUD();
-      }
-
-      function resetAll() {
-        score = 0;
-        gameTime = 0;
-        resetRound('R');
-        running = false;
-        updateHUD();
-        draw(0);
-      }
-
-      function updateHUD() {
-        scoreEl.textContent = score;
-        speedEl.textContent = `${ball.speedScale.toFixed(2)}×`;
-        modeEl.textContent = 'Default';
-      }
-
-      function resizeForHiDPI() {
-        const dpr = Math.max(1, Math.floor(window.devicePixelRatio || 1));
-        const rect = canvas.getBoundingClientRect();
-        const targetW = Math.round(rect.width * dpr);
-        const targetH = Math.round((rect.width * 520 / 900) * dpr);
-        
-        if (canvas.width !== targetW || canvas.height !== targetH) {
-          canvas.width = targetW;
-          canvas.height = targetH;
-          resetRound('R');
-          draw(0);
+      // Reveal logic
+      document.addEventListener('click', function(e) {
+        const btn = e.target.closest('[data-action="reveal"]');
+        if (!btn) return;
+        e.preventDefault();
+        const targetId = btn.getAttribute('data-target');
+        if (!targetId) return;
+        document.body.classList.add('revealed');
+        const targetEl = document.querySelector(targetId);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-      }
+      });
 
-      function drawScanlines() {
-        ctx.save();
-        ctx.globalAlpha = 0.12;
-        ctx.fillStyle = 'rgba(184,255,194,0.08)';
-        for (let y = 0; y < H(); y += 3) {
-          ctx.fillRect(0, y, W(), 1);
-        }
-        ctx.restore();
-      }
-
-      function drawGrid() {
-        ctx.save();
-        ctx.strokeStyle = GRID;
-        ctx.lineWidth = 1;
-        ctx.setLineDash([8, 10]);
-        ctx.beginPath();
-        ctx.moveTo(W() / 2, 14);
-        ctx.lineTo(W() / 2, H() - 14);
-        ctx.stroke();
-        ctx.setLineDash([2, 10]);
-        for (let i = 1; i < 6; i++) {
-          const x = (W() / 6) * i;
-          ctx.beginPath();
-          ctx.moveTo(x, 0);
-          ctx.lineTo(x, H());
-          ctx.stroke();
-        }
-        for (let i = 1; i < 4; i++) {
-          const y = (H() / 4) * i;
-          ctx.beginPath();
-          ctx.moveTo(0, y);
-          ctx.lineTo(W(), y);
-          ctx.stroke();
-        }
-        ctx.restore();
-      }
-
-      function glowFill(fn) {
-        ctx.save();
-        ctx.shadowColor = GLOW;
-        ctx.shadowBlur = 14;
-        ctx.fillStyle = GLOW;
-        fn();
-        ctx.restore();
-      }
-
-      function drawRoundRect(x, y, w, h, r) {
-        const rr = Math.min(r, w / 2, h / 2);
-        ctx.beginPath();
-        ctx.moveTo(x + rr, y);
-        ctx.arcTo(x + w, y, x + w, y + h, rr);
-        ctx.arcTo(x + w, y + h, x, y + h, rr);
-        ctx.arcTo(x, y + h, x, y, rr);
-        ctx.arcTo(x, y, x + w, y, rr);
-        ctx.closePath();
-      }
-
-      function draw(t) {
-        ctx.clearRect(0, 0, W(), H());
-        drawGrid();
-
-        const xL = paddle.inset;
-        const xWall = W() - paddle.inset; // Right wall position
-        
-        // Draw left paddle
-        glowFill(() => {
-          ctx.fillRect(xL, paddle.yL, paddle.w, paddle.h);
+      document.querySelectorAll('nav a[data-nav="reveal"]').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.body.classList.add('revealed');
+          const href = this.getAttribute('href');
+          const target = document.querySelector(href);
+          if (target) target.scrollIntoView({ behavior: 'smooth' });
         });
-        
-        // Draw right wall (full height)
-        glowFill(() => {
-          ctx.fillRect(xWall, 14, paddle.w, H() - 28);
+      });
+
+      // Game toggle
+      const brand = document.getElementById('brandClick');
+      const game = document.getElementById('retro-pong');
+      if (brand && game) {
+        brand.addEventListener('click', function() {
+          if (game.style.display === 'none' || game.style.display === '') {
+            game.style.display = 'block';
+            if (!window.rrpInitialized) {
+              initRetroPong();
+            }
+          } else {
+            game.style.display = 'none';
+          }
         });
-
-        // Draw ball
-        glowFill(() => {
-          ctx.beginPath();
-          ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2);
-          ctx.fill();
-        });
-
-        // Ball trail
-        ctx.save();
-        ctx.globalAlpha = 0.10;
-        ctx.fillStyle = GLOW;
-        ctx.beginPath();
-        ctx.arc(ball.x - ball.vx * 0.02, ball.y - ball.vy * 0.02, ball.r * 0.85, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-
-        // Frame
-        ctx.save();
-        ctx.shadowColor = GLOW;
-        ctx.shadowBlur = 12;
-        ctx.strokeStyle = GLOW;
-        ctx.lineWidth = 2;
-        drawRoundRect(8, 8, W() - 16, H() - 16, 16);
-        ctx.stroke();
-        ctx.restore();
-
-        drawScanlines();
-
-        if (!running) {
-          ctx.save();
-          ctx.fillStyle = 'rgba(184,255,194,0.85)';
-          ctx.font = `bold ${Math.max(16, Math.floor(W() / 40))}px ui-monospace, monospace`;
-          ctx.textAlign = 'center';
-          ctx.fillText('Press SPACE or Start to play', W() / 2, H() / 2 - 10);
-          ctx.font = `${Math.max(12, Math.floor(W() / 55))}px ui-monospace, monospace`;
-          ctx.fillStyle = 'rgba(184,255,194,0.70)';
-          ctx.fillText('Keep the ball in play!', W() / 2, H() / 2 + 20);
-          ctx.restore();
-        }
       }
 
-      function collidePaddle(px, py, pw, ph) {
-        const cx = ball.x, cy = ball.y, r = ball.r;
-        const nearestX = clamp(cx, px, px + pw);
-        const nearestY = clamp(cy, py, py + ph);
-        const dx = cx - nearestX;
-        const dy = cy - nearestY;
-        return (dx * dx + dy * dy) <= r * r;
-      }
-
-      function step(dt) {
-        // Increase game time and speed gradually - FASTER progression
-        gameTime += dt;
-        // Speed increases by 0.15 every 3 seconds, capped at 3.5x (much faster!)
-        ball.speedScale = clamp(1.0 + (gameTime / 3) * 0.15, 1.0, 3.5);
-        updateHUD();
-
-        // Player paddle movement
-        const dy = paddle.speed * dt;
-        if (keys.has('w')) paddle.yL -= dy;
-        if (keys.has('s')) paddle.yL += dy;
+      // Game initialization
+      function initRetroPong() {
+        window.rrpInitialized = true;
         
-        paddle.yL = clamp(paddle.yL, 14, H() - 14 - paddle.h);
+        const canvas = document.getElementById('rrpCanvas');
+        if (!canvas) return;
+        
+        const ctx = canvas.getContext('2d');
+        const startBtn = document.getElementById('rrpStart');
+        const resetBtn = document.getElementById('rrpReset');
+        const scoreEl = document.getElementById('rrpScore');
+        const speedEl = document.getElementById('rrpSpeed');
+        const modeEl = document.getElementById('rrpModeLabel');
 
-        // Move ball
-        ball.x += ball.vx * dt * ball.speedScale;
-        ball.y += ball.vy * dt * ball.speedScale;
+        const GLOW = '#b8ffc2';
+        const GRID = 'rgba(184,255,194,0.10)';
 
-        // Wall bounce (top and bottom)
-        if (ball.y - ball.r < 14) {
-          ball.y = 14 + ball.r;
-          ball.vy *= -1;
+        let running = false;
+        let lastT = 0;
+        let score = 0;
+        let gameTime = 0;
+
+        const W = function() { return canvas.width; };
+        const H = function() { return canvas.height; };
+
+        const paddle = {
+          w: 14,
+          h: 96,
+          inset: 28,
+          speed: 640,
+          yL: 0,
+        };
+
+        const ball = {
+          r: 9,
+          x: 0,
+          y: 0,
+          vx: 520,
+          vy: 220,
+          speedScale: 1.0,
+        };
+
+        const keys = new Set();
+        let dragging = false;
+
+        function clamp(v, a, b) {
+          return Math.max(a, Math.min(b, v));
         }
-        if (ball.y + ball.r > H() - 14) {
-          ball.y = H() - 14 - ball.r;
-          ball.vy *= -1;
-        }
 
-        // Paddle collision (left side - player)
-        const xL = paddle.inset;
-        if (ball.vx < 0 && collidePaddle(xL, paddle.yL, paddle.w, paddle.h)) {
-          ball.x = xL + paddle.w + ball.r + 0.5;
-          const paddleCenter = paddle.yL + paddle.h / 2;
-          const hitPosition = (ball.y - paddleCenter) / (paddle.h / 2);
-          const maxVy = 520;
-          ball.vx = Math.abs(ball.vx); // Make sure ball goes right
-          ball.vy = clamp(hitPosition * maxVy, -maxVy, maxVy);
-          score += 1; // ONLY score on paddle hit
+        function resetRound(servingTo) {
+          servingTo = servingTo || 'R';
+          paddle.yL = (H() - paddle.h) / 2;
+          ball.x = W() / 2;
+          ball.y = H() / 2;
+          const dir = (servingTo === 'R') ? 1 : -1;
+          const angle = (Math.random() * 0.6 - 0.3);
+          const base = 520;
+          ball.speedScale = 1.0;
+          ball.vx = dir * base;
+          ball.vy = base * 0.45 * (Math.random() < 0.5 ? -1 : 1) + base * 0.25 * angle;
           updateHUD();
         }
-        
-        // Right wall collision (static wall) - NO SCORING
-        const xWall = W() - paddle.inset;
-        if (ball.vx > 0 && ball.x + ball.r >= xWall) {
-          ball.x = xWall - ball.r - 0.5;
-          ball.vx = -Math.abs(ball.vx); // Make sure ball goes left
-          // Removed score increment here - wall bounce doesn't score
-        }
 
-        // Fail condition - ball goes past left edge (player missed it)
-        if (ball.x + ball.r < 0) {
+        function resetAll() {
+          score = 0;
+          gameTime = 0;
+          resetRound('R');
           running = false;
-          // Just stop the game, user can press R to restart
+          updateHUD();
+          draw(0);
         }
 
-        draw();
-      }
+        function updateHUD() {
+          if (scoreEl) scoreEl.textContent = score;
+          if (speedEl) speedEl.textContent = ball.speedScale.toFixed(2) + '×';
+          if (modeEl) modeEl.textContent = 'Default';
+        }
 
-      function loop(t) {
-        if (!lastT) lastT = t;
-        const dt = Math.min(0.02, (t - lastT) / 1000);
-        lastT = t;
-        if (running) step(dt);
-        else draw(t);
+        function resizeForHiDPI() {
+          const dpr = Math.max(1, Math.floor(window.devicePixelRatio || 1));
+          const rect = canvas.getBoundingClientRect();
+          const targetW = Math.round(rect.width * dpr);
+          const targetH = Math.round((rect.width * 520 / 900) * dpr);
+          
+          if (canvas.width !== targetW || canvas.height !== targetH) {
+            canvas.width = targetW;
+            canvas.height = targetH;
+            resetRound('R');
+            draw(0);
+          }
+        }
+
+        function drawScanlines() {
+          ctx.save();
+          ctx.globalAlpha = 0.12;
+          ctx.fillStyle = 'rgba(184,255,194,0.08)';
+          for (let y = 0; y < H(); y += 3) {
+            ctx.fillRect(0, y, W(), 1);
+          }
+          ctx.restore();
+        }
+
+        function drawGrid() {
+          ctx.save();
+          ctx.strokeStyle = GRID;
+          ctx.lineWidth = 1;
+          ctx.setLineDash([8, 10]);
+          ctx.beginPath();
+          ctx.moveTo(W() / 2, 14);
+          ctx.lineTo(W() / 2, H() - 14);
+          ctx.stroke();
+          ctx.setLineDash([2, 10]);
+          for (let i = 1; i < 6; i++) {
+            const x = (W() / 6) * i;
+            ctx.beginPath();
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, H());
+            ctx.stroke();
+          }
+          for (let i = 1; i < 4; i++) {
+            const y = (H() / 4) * i;
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(W(), y);
+            ctx.stroke();
+          }
+          ctx.restore();
+        }
+
+        function glowFill(fn) {
+          ctx.save();
+          ctx.shadowColor = GLOW;
+          ctx.shadowBlur = 14;
+          ctx.fillStyle = GLOW;
+          fn();
+          ctx.restore();
+        }
+
+        function drawRoundRect(x, y, w, h, r) {
+          const rr = Math.min(r, w / 2, h / 2);
+          ctx.beginPath();
+          ctx.moveTo(x + rr, y);
+          ctx.arcTo(x + w, y, x + w, y + h, rr);
+          ctx.arcTo(x + w, y + h, x, y + h, rr);
+          ctx.arcTo(x, y + h, x, y, rr);
+          ctx.arcTo(x, y, x + w, y, rr);
+          ctx.closePath();
+        }
+
+        function draw(t) {
+          ctx.clearRect(0, 0, W(), H());
+          drawGrid();
+
+          const xL = paddle.inset;
+          const xWall = W() - paddle.inset;
+          
+          glowFill(function() {
+            ctx.fillRect(xL, paddle.yL, paddle.w, paddle.h);
+          });
+          
+          glowFill(function() {
+            ctx.fillRect(xWall, 14, paddle.w, H() - 28);
+          });
+
+          glowFill(function() {
+            ctx.beginPath();
+            ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2);
+            ctx.fill();
+          });
+
+          ctx.save();
+          ctx.globalAlpha = 0.10;
+          ctx.fillStyle = GLOW;
+          ctx.beginPath();
+          ctx.arc(ball.x - ball.vx * 0.02, ball.y - ball.vy * 0.02, ball.r * 0.85, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+
+          ctx.save();
+          ctx.shadowColor = GLOW;
+          ctx.shadowBlur = 12;
+          ctx.strokeStyle = GLOW;
+          ctx.lineWidth = 2;
+          drawRoundRect(8, 8, W() - 16, H() - 16, 16);
+          ctx.stroke();
+          ctx.restore();
+
+          drawScanlines();
+
+          if (!running) {
+            ctx.save();
+            ctx.fillStyle = 'rgba(184,255,194,0.85)';
+            ctx.font = 'bold ' + Math.max(16, Math.floor(W() / 40)) + 'px ui-monospace, monospace';
+            ctx.textAlign = 'center';
+            ctx.fillText('Press SPACE or Start to play', W() / 2, H() / 2 - 10);
+            ctx.font = Math.max(12, Math.floor(W() / 55)) + 'px ui-monospace, monospace';
+            ctx.fillStyle = 'rgba(184,255,194,0.70)';
+            ctx.fillText('Keep the ball in play!', W() / 2, H() / 2 + 20);
+            ctx.restore();
+          }
+        }
+
+        function collidePaddle(px, py, pw, ph) {
+          const cx = ball.x, cy = ball.y, r = ball.r;
+          const nearestX = clamp(cx, px, px + pw);
+          const nearestY = clamp(cy, py, py + ph);
+          const dx = cx - nearestX;
+          const dy = cy - nearestY;
+          return (dx * dx + dy * dy) <= r * r;
+        }
+
+        function step(dt) {
+          gameTime += dt;
+          ball.speedScale = clamp(1.0 + (gameTime / 3) * 0.15, 1.0, 3.5);
+          updateHUD();
+
+          const dy = paddle.speed * dt;
+          if (keys.has('w')) paddle.yL -= dy;
+          if (keys.has('s')) paddle.yL += dy;
+          
+          paddle.yL = clamp(paddle.yL, 14, H() - 14 - paddle.h);
+
+          ball.x += ball.vx * dt * ball.speedScale;
+          ball.y += ball.vy * dt * ball.speedScale;
+
+          if (ball.y - ball.r < 14) {
+            ball.y = 14 + ball.r;
+            ball.vy *= -1;
+          }
+          if (ball.y + ball.r > H() - 14) {
+            ball.y = H() - 14 - ball.r;
+            ball.vy *= -1;
+          }
+
+          const xL = paddle.inset;
+          if (ball.vx < 0 && collidePaddle(xL, paddle.yL, paddle.w, paddle.h)) {
+            ball.x = xL + paddle.w + ball.r + 0.5;
+            const paddleCenter = paddle.yL + paddle.h / 2;
+            const hitPosition = (ball.y - paddleCenter) / (paddle.h / 2);
+            const maxVy = 520;
+            ball.vx = Math.abs(ball.vx);
+            ball.vy = clamp(hitPosition * maxVy, -maxVy, maxVy);
+            score += 1;
+            updateHUD();
+          }
+          
+          const xWall = W() - paddle.inset;
+          if (ball.vx > 0 && ball.x + ball.r >= xWall) {
+            ball.x = xWall - ball.r - 0.5;
+            ball.vx = -Math.abs(ball.vx);
+          }
+
+          if (ball.x + ball.r < 0) {
+            running = false;
+          }
+
+          draw();
+        }
+
+        function loop(t) {
+          if (!lastT) lastT = t;
+          const dt = Math.min(0.02, (t - lastT) / 1000);
+          lastT = t;
+          if (running) step(dt);
+          else draw(t);
+          requestAnimationFrame(loop);
+        }
+
+        window.addEventListener('resize', resizeForHiDPI);
+        
+        document.addEventListener('keydown', function(e) {
+          const k = e.key.toLowerCase();
+          if (k === ' ') {
+            e.preventDefault();
+            running = !running;
+            return;
+          }
+          if (k === 'r') {
+            resetAll();
+            return;
+          }
+          if (k === 'arrowup' || k === 'arrowdown') e.preventDefault();
+          keys.add(k);
+        });
+
+        document.addEventListener('keyup', function(e) {
+          keys.delete(e.key.toLowerCase());
+        });
+
+        function pointerToCanvas(e) {
+          const rect = canvas.getBoundingClientRect();
+          const x = (e.clientX - rect.left) * (canvas.width / rect.width);
+          const y = (e.clientY - rect.top) * (canvas.height / rect.height);
+          return { x: x, y: y };
+        }
+
+        canvas.addEventListener('pointerdown', function(e) {
+          dragging = true;
+          canvas.setPointerCapture(e.pointerId);
+        });
+
+        canvas.addEventListener('pointerup', function() {
+          dragging = false;
+        });
+
+        canvas.addEventListener('pointercancel', function() {
+          dragging = false;
+        });
+
+        canvas.addEventListener('pointermove', function(e) {
+          if (!dragging) return;
+          const p = pointerToCanvas(e);
+          if (p.x < canvas.width / 2) {
+            paddle.yL = clamp(p.y - paddle.h / 2, 14, H() - 14 - paddle.h);
+          }
+        });
+
+        if (startBtn) {
+          startBtn.addEventListener('click', function() {
+            running = !running;
+          });
+        }
+
+        if (resetBtn) {
+          resetBtn.addEventListener('click', function() {
+            resetAll();
+          });
+        }
+
+        resizeForHiDPI();
+        resetAll();
         requestAnimationFrame(loop);
       }
-
-      window.addEventListener('resize', resizeForHiDPI);
-      
-      document.addEventListener('keydown', (e) => {
-        const k = e.key.toLowerCase();
-        if (k === ' ') {
-          e.preventDefault();
-          running = !running;
-          return;
-        }
-        if (k === 'r') {
-          resetAll();
-          return;
-        }
-        if (k === 'arrowup' || k === 'arrowdown') e.preventDefault();
-        keys.add(k);
-      });
-
-      document.addEventListener('keyup', (e) => {
-        keys.delete(e.key.toLowerCase());
-      });
-
-      function pointerToCanvas(e) {
-        const rect = canvas.getBoundingClientRect();
-        const x = (e.clientX - rect.left) * (canvas.width / rect.width);
-        const y = (e.clientY - rect.top) * (canvas.height / rect.height);
-        return { x, y };
-      }
-
-      canvas.addEventListener('pointerdown', (e) => {
-        dragging = true;
-        canvas.setPointerCapture(e.pointerId);
-      });
-
-      canvas.addEventListener('pointerup', () => {
-        dragging = false;
-      });
-
-      canvas.addEventListener('pointercancel', () => {
-        dragging = false;
-      });
-
-      canvas.addEventListener('pointermove', (e) => {
-        if (!dragging) return;
-        const p = pointerToCanvas(e);
-        if (p.x < canvas.width / 2) {
-          paddle.yL = clamp(p.y - paddle.h / 2, 14, H() - 14 - paddle.h);
-        }
-      });
-
-      startBtn.
+    })();
+  </script>
+</body>
+</html>
