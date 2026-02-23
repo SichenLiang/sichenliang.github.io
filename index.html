@@ -177,20 +177,11 @@
     .portrait{
       border-radius: var(--radius);
       overflow: hidden;
-      background: transparent;
       box-shadow: var(--shadow);
-      aspect-ratio: 4 / 5;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color: rgba(0,0,0,0.45);
-      font-size: 0.95rem;
-      text-align:center;
     }
     .portrait img{
       width:100%;
-      height:100%;
-      object-fit: cover;
+      height:auto;
       display:block;
     }
     main{ padding: 22px 0 72px 0; }
@@ -230,23 +221,12 @@
     .card li{ margin-bottom: 8px; }
     .imgSlot{
       border-radius: 12px;
-      background: transparent;
-      aspect-ratio: 16 / 9;
       margin: 10px 0 12px 0;
       overflow:hidden;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color: #8b0000;
-      font-size: 1.1rem;
-      font-weight: bold;
-      text-align:center;
-      position: relative;
     }
     .imgSlot img{
       width:100%;
-      height:100%;
-      object-fit: cover;
+      height:auto;
       display:block;
     }
     .row{
@@ -453,7 +433,7 @@
           <button id="rrpReset">Reset</button>
         </div>
       </div>
-      <div class="row">
+      <div class="row" style="padding:0; border:none;">
         <div style="flex:1 1 420px; min-width:280px;">
           <canvas id="rrpCanvas" width="900" height="520" aria-label="Retro Pong"></canvas>
         </div>
@@ -497,7 +477,7 @@
       </div>
       <div class="portrait">
         <img loading="lazy" src="myskateboardpic.jpg" alt="Sichen Liang longboarding"
-          onerror="this.remove(); this.parentElement.textContent='Image placeholder: myskateboardpic.jpg';">
+          onerror="this.style.display='none';">
       </div>
     </div>
 
@@ -554,7 +534,7 @@
           </ul>
           <div class="imgSlot">
             <img loading="lazy" src="technicalfoundation.jpg" alt="Technical foundation example"
-              onerror="this.remove(); this.parentElement.textContent='Image placeholder: technicalfoundation.jpg';">
+              onerror="this.style.display='none';">
           </div>
         </div>
       </div>
@@ -572,7 +552,7 @@
           <p class="muted">Bridging theory to real behavior in physical systems.</p>
           <div class="imgSlot">
             <img loading="lazy" src="controlsystems.jpg" alt="Control systems visualization"
-              onerror="this.remove(); this.parentElement.textContent='Image placeholder: controlsystems.jpg';">
+              onerror="this.style.display='none';">
           </div>
           <ul>
             <li>Feedback control, stability intuition, and system modeling.</li>
@@ -584,7 +564,7 @@
           <p class="muted">Sensing–actuation loops and system integration.</p>
           <div class="imgSlot">
             <img loading="lazy" src="robotics.jpg" alt="Robotics example"
-              onerror="this.remove(); this.parentElement.textContent='Image placeholder: robotics.jpg';">
+              onerror="this.style.display='none';">
           </div>
           <ul>
             <li>Robot subsystems: motors, drivers, control loops.</li>
@@ -596,7 +576,7 @@
           <p class="muted">From PCB + firmware to measurable performance.</p>
           <div class="imgSlot">
             <img loading="lazy" src="embedded.jpg" alt="Embedded motor control"
-              onerror="this.remove(); this.parentElement.textContent='Image placeholder: embedded.jpg';">
+              onerror="this.style.display='none';">
           </div>
           <ul>
             <li>Microcontrollers, embedded safety, and real-time coordination.</li>
@@ -627,11 +607,11 @@
             </ul>
             <div class="imgSlot">
               <img loading="lazy" src="xpeng1.jpg" alt="XPeng Motors experience - image 1"
-                onerror="this.remove(); this.parentElement.textContent='Image placeholder: xpeng1.jpg';">
+                onerror="this.style.display='none';">
             </div>
             <div class="imgSlot">
               <img loading="lazy" src="xpeng2.jpg" alt="XPeng Motors experience - image 2"
-                onerror="this.remove(); this.parentElement.textContent='Image placeholder: xpeng2.jpg';">
+                onerror="this.style.display='none';">
             </div>
           </div>
         </div>
@@ -652,11 +632,11 @@
             </ul>
             <div class="imgSlot">
               <img loading="lazy" src="birolab1.jpg" alt="BIOROLAB research - image 1"
-                onerror="this.remove(); this.parentElement.textContent='Image placeholder: birolab1.jpg';">
+                onerror="this.style.display='none';">
             </div>
             <div class="imgSlot">
               <img loading="lazy" src="birolab2.jpg" alt="BIOROLAB research - image 2"
-                onerror="this.remove(); this.parentElement.textContent='Image placeholder: birolab2.jpg';">
+                onerror="this.style.display='none';">
             </div>
           </div>
         </div>
@@ -674,7 +654,7 @@
             </ul>
             <div class="imgSlot">
               <img loading="lazy" src="frc.jpg" alt="FRC Team 5451 experience"
-                onerror="this.remove(); this.parentElement.textContent='Image placeholder: frc.jpg';">
+                onerror="this.style.display='none';">
             </div>
           </div>
         </div>
@@ -707,7 +687,7 @@
           <h3>NYU Tandon Building Redesign (MetroTech 6)</h3>
           <div class="imgSlot">
             <img loading="lazy" src="revit.jpg" alt="Revit building redesign"
-              onerror="this.remove(); this.parentElement.textContent='Image placeholder: revit.jpg';">
+              onerror="this.style.display='none';">
           </div>
           <ul>
             <li>Directed conceptual redesign of the NYU Metro 6 building layout</li>
@@ -725,7 +705,7 @@
           </ul>
           <div class="imgSlot">
             <img loading="lazy" src="bikeansys.jpg" alt="Bike Frame Structure Optimization"
-              onerror="this.remove(); this.parentElement.textContent='Image placeholder: bikeansys.jpg';">
+              onerror="this.style.display='none';">
           </div>
         </div>
         <div class="card">
@@ -733,7 +713,7 @@
           <h3>Prototyping & Structure Design</h3>
           <div class="imgSlot">
             <img loading="lazy" src="3dskate.jpg" alt="Prototyping work"
-              onerror="this.remove(); this.parentElement.textContent='Image placeholder: 3dskate.jpg';">
+              onerror="this.style.display='none';">
           </div>
           <ul>
             <li>Designed and 3D-printed longboard components with iterative fit/feedback cycles</li>
@@ -761,7 +741,7 @@
             </ul>
             <div class="imgSlot">
               <img loading="lazy" src="cyc.jpg" alt="NYU Cycling Club activities"
-                onerror="this.remove(); this.parentElement.textContent='Image placeholder: cyc.jpg';">
+                onerror="this.style.display='none';">
             </div>
           </div>
         </div>
@@ -792,7 +772,7 @@
             </ul>
             <div class="imgSlot">
               <img loading="lazy" src="u18champ.jpg" alt="Awards"
-                onerror="this.remove(); this.parentElement.textContent='Image placeholder: u18champ.jpg';">
+                onerror="this.style.display='none';">
             </div>
           </div>
         </div>
