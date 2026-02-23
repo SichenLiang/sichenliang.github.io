@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <!-- REBUILD CACHE v2.0 - 2026-01-27 -->
   <title>Sichen Liang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
@@ -178,9 +177,8 @@
     .portrait{
       border-radius: var(--radius);
       overflow: hidden;
-      background: #d9d3ca;
+      background: transparent;
       box-shadow: var(--shadow);
-      border: 1px solid var(--rule);
       aspect-ratio: 4 / 5;
       display:flex;
       align-items:center;
@@ -188,7 +186,6 @@
       color: rgba(0,0,0,0.45);
       font-size: 0.95rem;
       text-align:center;
-      padding: 14px;
     }
     .portrait img{
       width:100%;
@@ -233,8 +230,7 @@
     .card li{ margin-bottom: 8px; }
     .imgSlot{
       border-radius: 12px;
-      background: #d9d3ca;
-      border: 1px solid var(--rule);
+      background: transparent;
       aspect-ratio: 16 / 9;
       margin: 10px 0 12px 0;
       overflow:hidden;
@@ -245,13 +241,12 @@
       font-size: 1.1rem;
       font-weight: bold;
       text-align:center;
-      padding: 14px;
       position: relative;
     }
     .imgSlot img{
       width:100%;
       height:100%;
-      object-fit: contain;
+      object-fit: cover;
       display:block;
     }
     .row{
@@ -765,8 +760,8 @@
               <li>Managed logistics, budgeting, and safety protocols for regional racing events</li>
             </ul>
             <div class="imgSlot">
-              <img loading="lazy" src="cycling.jpg" alt="NYU Cycling Club activities"
-                onerror="this.remove(); this.parentElement.textContent='Image placeholder: cycling.jpg';">
+              <img loading="lazy" src="cyc.jpg" alt="NYU Cycling Club activities"
+                onerror="this.remove(); this.parentElement.textContent='Image placeholder: cyc.jpg';">
             </div>
           </div>
         </div>
@@ -782,10 +777,6 @@
               <li>Founded School Badminton Club</li>
               <li>Organized badminton events between houses</li>
             </ul>
-            <div class="imgSlot">
-              <img loading="lazy" src="badminton.jpg" alt="Badminton Club activities"
-                onerror="this.remove(); this.parentElement.textContent='Image placeholder: badminton.jpg';">
-            </div>
           </div>
         </div>
 
@@ -800,8 +791,8 @@
               <li>7th Place, 2025 Reddish Knob Downhill Race (Open Class)</li>
             </ul>
             <div class="imgSlot">
-              <img loading="lazy" src="awards.jpg" alt="Awards"
-                onerror="this.remove(); this.parentElement.textContent='Image placeholder: awards.jpg';">
+              <img loading="lazy" src="u18champ.jpg" alt="Awards"
+                onerror="this.remove(); this.parentElement.textContent='Image placeholder: u18champ.jpg';">
             </div>
           </div>
         </div>
