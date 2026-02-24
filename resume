@@ -1,113 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Resume | Sichen Liang</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    /* Global Variables to match your site perfectly */
-    :root{
-      --ink:#111111; --muted:#5a5a5a; --paper:#ffffff; --wash:#f7f5f1;
-      --navy:#1d2545; --brown:#8b5a2b; --blue:#1d2f4e; --rule:#e7e1d8;
-      --shadow: 0 10px 24px rgba(0,0,0,0.06); --radius: 14px;
+    /* Ultra-clean, readable styling */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #525659; /* Standard dark PDF viewer background */
+      display: flex;
+      flex-direction: column;
+      height: 100vh; /* Forces the page to be exactly the height of the screen */
+      overflow: hidden; /* Prevents ugly double scrollbars */
     }
-    *{ box-sizing:border-box; }
-    body{
-      margin:0; background:var(--wash); color:var(--ink); line-height:1.7;
-      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    }
-    a { text-decoration: none; color: var(--blue); }
-    .wrap{ max-width: 1120px; margin: 0 auto; padding: 0 22px; }
     
-    /* Header Styles */
-    header{
-      position: sticky; top: 0; z-index: 10;
-      background: var(--blue); backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--rule);
-    }
-    .topbar{ display:flex; align-items:center; justify-content: space-between; padding: 14px 0; }
-    .brand{ display:flex; flex-direction:column; line-height:1.25; }
-    .brand .name{
-      font-family: ui-serif, Georgia, serif; font-weight: 800;
-      letter-spacing: 0.55px; color: #ffffff; font-size: 1.06rem; text-transform: uppercase;
-    }
-    .brand .tag{ font-size: 0.9rem; color: #e0e0e0; }
-    nav{ display:flex; gap: 6px; align-items:center; }
-    nav a{ font-size: 0.86rem; color: #ffffff; padding: 7px 10px; border-radius: 999px; letter-spacing: 0.8px; text-transform: uppercase; }
-    nav a:hover{ background: rgba(255,255,255,0.15); }
-    
-    /* Resume Viewer Styles */
-    main { padding: 40px 0 80px 0; }
-    .toolbar {
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      margin-bottom: 20px;
-    }
-    .back-link {
-      display: inline-flex;
+    .topbar {
+      background-color: #1d2f4e; /* Matches your site's navy blue */
+      color: white;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
       align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      z-index: 10;
+    }
+
+    .back-link {
+      color: white;
+      text-decoration: none;
       font-weight: 600;
       font-size: 0.95rem;
+      letter-spacing: 0.5px;
     }
-    .back-link:hover { text-decoration: underline; }
-    .btn.blue {
-      background: var(--blue);
-      color: #ffffff;
+
+    .back-link:hover {
+      color: #90caf9;
+    }
+
+    .download-btn {
+      background-color: #8b5a2b; /* Matches your site's brown accent */
+      color: white;
+      text-decoration: none;
       padding: 8px 16px;
-      border-radius: 999px;
-      font-size: 0.9rem;
+      border-radius: 6px;
       font-weight: 600;
-      border: 1px solid var(--blue);
+      font-size: 0.9rem;
       transition: filter 0.2s;
     }
-    .btn.blue:hover { filter: brightness(1.15); }
-    
-    .resume-container {
-      background: var(--paper);
-      padding: 10px;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      border: 1px solid var(--rule);
-      height: 80vh; /* Takes up most of the screen */
+
+    .download-btn:hover {
+      filter: brightness(1.15);
     }
+
+    .pdf-container {
+      flex: 1; /* Automatically fills all remaining screen space */
+      width: 100%;
+    }
+
     iframe {
       width: 100%;
       height: 100%;
       border: none;
-      border-radius: 8px;
+      display: block;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="wrap topbar">
-      <a href="/" class="brand">
-        <div class="name">Sichen Liang</div>
-        <div class="tag">Electrical Engineering · NYU Tandon · Class of 2027</div>
-      </a>
-      <nav aria-label="Primary">
-        <a href="/">← Back to Home</a>
-      </nav>
-    </div>
-  </header>
+  <div class="topbar">
+    <a href="../" class="back-link">← Back to Portfolio</a>
+    
+    <a href="../CV_Sichen_Liang.pdf" target="_blank" class="download-btn">Download PDF</a>
+  </div>
 
-  <main class="wrap">
-    <div class="toolbar">
-      <a href="/" class="back-link">← Return to Portfolio</a>
-      <a href="../CV_Sichen_Liang.pdf" target="_blank" class="btn blue">Download PDF</a>
-    </div>
-
-    <div class="resume-container">
-      <iframe src="../CV_Sichen_Liang.pdf" title="Sichen Liang Resume">
-        <p style="text-align:center; padding: 40px;">
-          Your browser does not support embedded PDFs. 
-          <a href="../CV_Sichen_Liang.pdf">Click here to download it instead.</a>
-        </p>
-      </iframe>
-    </div>
-  </main>
+  <div class="pdf-container">
+    <iframe src="../CV_Sichen_Liang.pdf#toolbar=1&view=FitH" title="Sichen Liang Resume">
+      <p style="text-align: center; color: white; padding-top: 50px;">
+        Your browser does not support viewing PDFs.<br><br>
+        <a href="../CV_Sichen_Liang.pdf" style="color: #90caf9;">Click here to download the resume</a>.
+      </p>
+    </iframe>
+  </div>
 
 </body>
 </html>
