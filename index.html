@@ -196,6 +196,7 @@
       width:100%;
       height:100%;
       object-fit: cover;
+      object-position: center bottom; /* Drops the frame down to crop sky and show ground */
       display:block;
     }
     main{ padding: 22px 0 72px 0; }
@@ -317,8 +318,8 @@
       text-transform: uppercase;
       margin-bottom: 6px;
     }
-    .miniCard h3{ margin: 0 0 6px 0; }
-    .miniCard p{ margin: 0; color: var(--muted); font-size: 0.95rem; }
+    .miniCard h3{ margin: 0 0 6px 0; font-size: 0.98rem; line-height: 1.3; }
+    .miniCard p{ margin: 0; color: var(--muted); font-size: 0.92rem; }
     footer{
       border-top: 1px solid var(--rule);
       padding: 28px 0 34px 0;
@@ -486,8 +487,8 @@
           <div class="pill">Mechanical + Electrical Integration</div>
         </div>
         <div class="btnRow" role="group" aria-label="Primary actions">
-          <a href="/resume" class="btn blue">View Resume</a>
           <button class="btn primary" data-action="reveal" data-target="#about">Enter Portfolio</button>
+          <a href="/resume" class="btn blue">View Resume</a>
           <button class="btn" data-action="reveal" data-target="#experience">View Experience</button>
           <button class="btn" data-action="reveal" data-target="#contact">Contact</button>
         </div>
@@ -509,18 +510,18 @@
       <div class="miniGrid" style="margin-top: 14px;">
         <div class="miniCard">
           <div class="kicker">Research</div>
-          <h3>Motor Control PCB + Firmware</h3>
-          <p>Distributed motor-control modules; sensing + safety; real-time coordination.</p>
+          <h3>Research Assistant, Biomechatronics and Intelligent Robotics Lab</h3>
+          <p>Designed custom motor-control PCBs and real-time coordination firmware for multi-joint behavior.</p>
         </div>
         <div class="miniCard">
-          <div class="kicker">Project</div>
-          <h3>NYU Building Redesign (Revit)</h3>
-          <p>Full-scale modeling with system routing; fabricated scaled prototype.</p>
+          <div class="kicker">Internship</div>
+          <h3>Product Management Internship: XPeng Motors</h3>
+          <p>Conducted global EV market research and competitive benchmarking across international regions.</p>
         </div>
         <div class="miniCard">
-          <div class="kicker">Leadership</div>
-          <h3>NYU Cycling Club — VP</h3>
-          <p>Organized festivals and training; logistics + safety for regional events.</p>
+          <div class="kicker">Engineering</div>
+          <h3>Embedded & Hardware Control</h3>
+          <p>Bridging control theory and physical systems through rapid prototyping, machining, and hardware integration.</p>
         </div>
       </div>
     </div>
